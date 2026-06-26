@@ -274,11 +274,7 @@
     font-size: 12px;
   }
 
-  /* Responsive table scroll */
-  .table-wrap {
-    overflow-x: auto;
-    -webkit-overflow-scrolling: touch;
-  }
+  .table-wrap { overflow-x: auto; -webkit-overflow-scrolling: touch; }
 
   @media (max-width: 1024px) {
     .kpi-grid { grid-template-columns: repeat(2, 1fr); }
@@ -287,38 +283,33 @@
     .annual-numbers .used { font-size: 44px; }
     .annual-numbers .total { font-size: 36px; }
   }
-
   @media (max-width: 768px) {
     body { padding: 12px; }
     .header { padding: 20px; border-radius: 12px; }
     .header h1 { font-size: 20px; }
     .header .subtitle { font-size: 14px; }
     .header .meta { font-size: 11px; }
-    .annual-banner { padding: 16px 20px; border-radius: 12px; }
+    .annual-banner { padding: 16px 20px; }
     .annual-numbers .used { font-size: 40px; }
     .annual-numbers .divider { font-size: 28px; }
     .annual-numbers .total { font-size: 32px; }
     .annual-numbers .unit-big { font-size: 14px; }
-    .kpi-grid { gap: 10px; }
     .kpi { padding: 16px; }
     .kpi .value { font-size: 26px; }
     .chart-wrapper { height: 240px; }
     .chart-wrapper.small { height: 200px; }
-    .card { padding: 16px; border-radius: 10px; }
+    .card { padding: 16px; }
     table { font-size: 12px; }
     th { font-size: 11px; padding: 8px 6px; }
     td { padding: 8px 6px; }
   }
-
   @media (max-width: 480px) {
     body { padding: 8px; }
     .header { padding: 16px; }
     .header h1 { font-size: 17px; }
-    .header .subtitle { font-size: 13px; }
     .annual-numbers .used { font-size: 34px; }
     .annual-numbers .total { font-size: 28px; }
     .annual-circle { display: none; }
-    .kpi-grid { gap: 8px; }
     .kpi { padding: 12px 14px; }
     .kpi .value { font-size: 22px; }
     .kpi .label { font-size: 12px; }
@@ -327,7 +318,6 @@
     .card h2 { font-size: 14px; margin-bottom: 12px; }
     .chart-wrapper { height: 210px; }
     .chart-wrapper.small { height: 180px; }
-    .row, .row-2, .kpi-grid { gap: 8px; }
     table { font-size: 11px; min-width: 480px; }
     th { font-size: 10px; padding: 6px 5px; }
     td { padding: 7px 5px; }
@@ -414,8 +404,7 @@
   </div>
   <div class="card">
     <h2>สรุป Quota รายเดือน</h2>
-    <div class="table-wrap">
-    <table>
+    <div class="table-wrap"><table>
       <thead>
         <tr>
           <th>เดือน</th>
@@ -426,8 +415,7 @@
         </tr>
       </thead>
       <tbody id="combinedTable"></tbody>
-    </table>
-    </div>
+    </table></div>
   </div>
 </div>
 
@@ -450,8 +438,7 @@
 <!-- CR detail table -->
 <div class="card" style="margin-bottom: 24px;">
   <h2>รายการ CR ทั้งหมด (41 Logged + 2 Pending Log = 43 รายการ)</h2>
-  <div class="table-wrap">
-  <table>
+  <div class="table-wrap"><table>
     <thead>
       <tr>
         <th>CR No</th>
@@ -467,8 +454,7 @@
       </tr>
     </thead>
     <tbody id="crTable"></tbody>
-  </table>
-  </div>
+  </table></div>
 </div>
 
 
@@ -739,4 +725,54 @@ new Chart(document.getElementById('taskTypeChart'), {
 new Chart(document.getElementById('statusChart'), {
   type: 'doughnut',
   data: {
-    labels: ['เสร็จสิ้น (33)', '
+    labels: ['เสร็จสิ้น (33)', 'กำลังดำเนินการ (2)', 'รอดำเนินการ (6)', 'รอแจ้ง ISCode (2)'],
+    datasets: [{
+      data: [33, 2, 6, 2],
+      backgroundColor: [GREEN, ORANGE, PURPLE, '#adb5bd'],
+      borderWidth: 2,
+      borderColor: '#fff'
+    }]
+  },
+  options: {
+    responsive: true,
+    maintainAspectRatio: false,
+    plugins: {
+      legend: { position: 'bottom' },
+      tooltip: {
+        callbacks: {
+          label: (ctx) => `${ctx.label}: ${ctx.raw} รายการ`
+        }
+      }
+    }
+  }
+});
+
+
+const tbody = document.getElementById('crTable');
+crData.forEach(row => {
+  const tr = document.createElement('tr');
+  const taskBadge = row[1] === 'Change Request' ? 'cr' : 'data';
+  const statusClass = row[6] === 'DONE' ? 'done' : (row[6] === 'WIP' ? 'wip' : (row[6] === 'WAIT' ? 'wait' : 'new'));
+  const statusLabel = {'DONE':'เสร็จสิ้น','WIP':'กำลังดำเนินการ','PENDING':'รอดำเนินการ','WAIT':'รอแจ้ง ISCode'}[row[6]] || row[6];
+  const mdDisplay = row[3].includes('*') ? `<span style="color:#6f42c1;" title="Proposed from docx, not yet logged">${row[3]}</span>` : row[3];
+  // Extract running CR number from format "25/CR13" → "CR-25"
+  const crNumber = row[0].startsWith('-') ? '<span style="color:#adb5bd;">รอ CR</span>' : 'CR-' + row[0].split('/')[0];
+  const requester = row[8] || '';
+  tr.innerHTML = `
+    <td><strong style="color:#25a9e0;">${crNumber}</strong></td>
+    <td style="color:#6c757d;font-size:12px;">${row[0]}</td>
+    <td><span class="badge ${taskBadge}">${row[1]}</span></td>
+    <td>${row[2]}</td>
+    <td><strong>${mdDisplay}</strong></td>
+    <td>${row[4]}</td>
+    <td>${row[5]}</td>
+    <td><span class="badge ${statusClass}">${statusLabel}</span></td>
+    <td style="font-size:12px;color:#25a9e0;">${requester}</td>
+    <td style="font-size:12px;color:#666">${row[7]}</td>
+  `;
+  tbody.appendChild(tr);
+});
+</script>
+
+</body>
+</html>
