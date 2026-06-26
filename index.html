@@ -393,7 +393,7 @@
 
 <!-- CR detail table -->
 <div class="card" style="margin-bottom: 24px;">
-  <h2>รายการ CR ทั้งหมด (40 Logged + 2 Pending Log = 42 รายการ)</h2>
+  <h2>รายการ CR ทั้งหมด (41 Logged + 2 Pending Log = 43 รายการ)</h2>
   <table>
     <thead>
       <tr>
@@ -435,9 +435,10 @@ const crData = [
   // [CRNo, Type, QuotaOf, MD, ReceiveDate(DD/MM/YYYY), LaunchDate(DD/MM/YYYY), Status, Summary, Requester]
   // ReceiveDate: Excel → Word (CR Date) → CSV | MD*: proposed from docx, not yet in Excel | FOC: not counted
   ['-/-',     'Change Request', '',         '-',     '-',          '-',          'WAIT',    '(40) เพิ่มการเก็บข้อมูล PSaleStatus ในเอกสาร DI ณ วันที่ขาย',                           'K.อ้น'],
-  ['-/-',     'Change Request', '',         '-',     '-',          '-',          'WAIT',    '(37) ปรับป้ายราคาสินค้า และทำรายงานสำหรับหน้าสาขา',                                      'K.อ้อย'],
-  ['40/CR20', 'DATA',           '',         '0.25*', '19/06/2026', '-',          'PENDING', '(39) เจาะแก้ไขยอดในเอกสาร VI-260600280 / GR-260600262',                                   '-'],
-  ['39/CR20', 'DATA',           '',         'FOC',   '19/06/2026', '-',          'PENDING', '(38) เปลี่ยน Ratio บาร์กล่อง 8859433790352 จาก 6→3 (เมอร์เรซกา)',                        'K.แคร์'],
+  ['-/-',     'Change Request', '',         '-',     '-',          '-',          'WAIT',    '(41) ปรับป้ายราคาสินค้า และทำรายงานสำหรับหน้าสาขา',                                      'K.อ้อย'],
+  ['40/CR20', 'DATA',           '',         '0.25*', '19/06/2026', '-',          'PENDING', '(39) เจาะแก้ไขยอดในเอกสาร VI-260600280 / GR-260600262',                                   'K.นุ๊ก'],
+  ['39/CR20', 'DATA',           '',         'FOC',   '19/06/2026', '-',          'PENDING', '(38) เปลี่ยน Ratio บาร์กล่อง 8859433790352 จาก 6→3 (เมอร์เรซกา)',                        'K.ฝ้าย'],
+  ['-/-',     'Change Request', '',         '-',     '10/06/2026', '-',          'PENDING', '(37) เพิ่มตาราง MinMax แยกสาขา (B001-B008+FG) และยอดขายย้อนหลัง ใน Product Info Panel เอกสาร PO', 'K.อ้น'],
   ['37/CR19', 'Change Request', '',         '1.25*', '08/06/2026', '-',          'PENDING', '(35) งานหน้าร้าน ปรับตัวเลือกสาเหตุ FR และ WTFR/WTBR แสดงสาเหตุ-หมายเหตุบนใบปิดลัง',  'K.อ้น'],
   ['38/CR19', 'DATA',           '',         '0.25*', '09/06/2026', '-',          'PENDING', '(36) อัพเดท PSaleStatus Q3-2026 (8,080 rows)',                                             'K.อ้น'],
   ['36/CR18', 'DATA',           '',         '0.50*', '08/06/2026', '-',          'PENDING', '(34) เปลี่ยนหน่วยสินค้า 8858842055519 (บราวอิท) บาร์หลักจาก กล่อง→ตลับ, บาร์รอง แพ็ค→กล่อง', 'K.แคร์'],
@@ -680,9 +681,9 @@ new Chart(document.getElementById('taskTypeChart'), {
 new Chart(document.getElementById('statusChart'), {
   type: 'doughnut',
   data: {
-    labels: ['เสร็จสิ้น (33)', 'กำลังดำเนินการ (2)', 'รอดำเนินการ (5)', 'รอแจ้ง ISCode (2)'],
+    labels: ['เสร็จสิ้น (33)', 'กำลังดำเนินการ (2)', 'รอดำเนินการ (6)', 'รอแจ้ง ISCode (2)'],
     datasets: [{
-      data: [33, 2, 5, 2],
+      data: [33, 2, 6, 2],
       backgroundColor: [GREEN, ORANGE, PURPLE, '#adb5bd'],
       borderWidth: 2,
       borderColor: '#fff'
@@ -709,9 +710,4 @@ crData.forEach(row => {
   const taskBadge = row[1] === 'Change Request' ? 'cr' : 'data';
   const statusClass = row[6] === 'DONE' ? 'done' : (row[6] === 'WIP' ? 'wip' : (row[6] === 'WAIT' ? 'wait' : 'new'));
   const statusLabel = {'DONE':'เสร็จสิ้น','WIP':'กำลังดำเนินการ','PENDING':'รอดำเนินการ','WAIT':'รอแจ้ง ISCode'}[row[6]] || row[6];
-  const mdDisplay = row[3].includes('*') ? `<span style="color:#6f42c1;" title="Proposed from docx, not yet logged">${row[3]}</span>` : row[3];
-  // Extract running CR number from format "25/CR13" → "CR-25"
-  const crNumber = row[0].startsWith('-') ? '<span style="color:#adb5bd;">รอ CR</span>' : 'CR-' + row[0].split('/')[0];
-  const requester = row[8] || '';
-  tr.innerHTML = `
-    <td><strong style="color:#25a9e0
+  const mdDisplay = row[3].includes('*') ? `<span style="color:#6f42c1;" title="Proposed from docx, not yet logged">${
