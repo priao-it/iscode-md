@@ -4,7 +4,7 @@
 <meta charset="UTF-8">
 <title>Priao MD 2026 Dashboard</title>
 <link href="https://fonts.googleapis.com/css2?family=Sarabun:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
-<script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.0/chart.umd.min.js"></script>
 <style>
   :root {
     --priao-blue: #25a9e0;
@@ -710,4 +710,4 @@ crData.forEach(row => {
   const taskBadge = row[1] === 'Change Request' ? 'cr' : 'data';
   const statusClass = row[6] === 'DONE' ? 'done' : (row[6] === 'WIP' ? 'wip' : (row[6] === 'WAIT' ? 'wait' : 'new'));
   const statusLabel = {'DONE':'เสร็จสิ้น','WIP':'กำลังดำเนินการ','PENDING':'รอดำเนินการ','WAIT':'รอแจ้ง ISCode'}[row[6]] || row[6];
-  const mdDisplay = row[3].includes('*') ? `<span style="color:#6f42c1;" title="Proposed from docx, not yet logged">${
+  const mdDisplay = row[3].includes('*') ? `<span style="color:#6f42c1;" title="Proposed from docx, not yet logge
