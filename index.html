@@ -1,0 +1,731 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+<meta charset="UTF-8">
+<title>Priao MD 2026 Dashboard</title>
+<link href="https://fonts.googleapis.com/css2?family=Sarabun:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+<script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.min.js"></script>
+<style>
+  :root {
+    --priao-blue: #25a9e0;
+    --priao-blue-dark: #1a7eb0;
+    --priao-blue-light: #e6f6fd;
+    --priao-black: #231f20;
+    --priao-grey: #6c757d;
+    --priao-grey-light: #f5f7fa;
+    --green: #28a745;
+    --orange: #fd7e14;
+    --red: #dc3545;
+    --purple: #6f42c1;
+    --border: #e3e8ee;
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body {
+    font-family: 'Sarabun', 'TH Sarabun New', sans-serif;
+    background: var(--priao-grey-light);
+    color: var(--priao-black);
+    padding: 24px;
+    min-height: 100vh;
+  }
+  .header {
+    background: linear-gradient(135deg, var(--priao-blue) 0%, var(--priao-blue-dark) 100%);
+    color: white;
+    padding: 28px 32px;
+    border-radius: 16px;
+    margin-bottom: 24px;
+    box-shadow: 0 4px 12px rgba(37, 169, 224, 0.2);
+  }
+  .header h1 { font-size: 28px; font-weight: 700; margin-bottom: 6px; }
+  .header .subtitle { font-size: 16px; opacity: 0.95; font-weight: 400; }
+  .header .meta { font-size: 13px; opacity: 0.85; margin-top: 8px; }
+
+  .annual-banner {
+    background: white;
+    border-radius: 16px;
+    padding: 24px 32px;
+    margin-bottom: 24px;
+    border: 2px solid var(--priao-blue);
+    box-shadow: 0 4px 16px rgba(37, 169, 224, 0.15);
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 24px;
+    position: relative;
+    overflow: hidden;
+  }
+  .annual-banner::before {
+    content: '';
+    position: absolute;
+    left: 0; top: 0; bottom: 0;
+    width: 6px;
+    background: linear-gradient(180deg, var(--priao-blue), var(--priao-blue-dark));
+  }
+  .annual-info { flex: 1; }
+  .annual-title {
+    font-size: 14px;
+    font-weight: 600;
+    color: var(--priao-grey);
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    margin-bottom: 8px;
+  }
+  .annual-numbers {
+    display: flex;
+    align-items: baseline;
+    gap: 8px;
+    margin-bottom: 8px;
+  }
+  .annual-numbers .used {
+    font-size: 56px;
+    font-weight: 800;
+    color: var(--priao-blue);
+    line-height: 1;
+  }
+  .annual-numbers .divider {
+    font-size: 36px;
+    color: var(--priao-grey);
+    font-weight: 300;
+  }
+  .annual-numbers .total {
+    font-size: 48px;
+    font-weight: 700;
+    color: var(--priao-black);
+    line-height: 1;
+  }
+  .annual-numbers .unit-big {
+    font-size: 18px;
+    color: var(--priao-grey);
+    margin-left: 8px;
+    font-weight: 500;
+  }
+  .annual-meta {
+    font-size: 14px;
+    color: var(--priao-grey);
+  }
+  .annual-meta strong { color: var(--priao-blue-dark); }
+  .annual-circle { flex-shrink: 0; }
+
+  .kpi-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 16px;
+    margin-bottom: 24px;
+  }
+  .kpi {
+    background: white;
+    border-radius: 12px;
+    padding: 20px;
+    border: 1px solid var(--border);
+    box-shadow: 0 1px 3px rgba(0,0,0,0.04);
+    position: relative;
+    overflow: hidden;
+  }
+  .kpi::before {
+    content: '';
+    position: absolute;
+    left: 0; top: 0; bottom: 0;
+    width: 4px;
+    background: var(--priao-blue);
+  }
+  .kpi.green::before { background: var(--green); }
+  .kpi.orange::before { background: var(--orange); }
+  .kpi.red::before { background: var(--red); }
+  .kpi.purple::before { background: var(--purple); }
+  .kpi .label {
+    font-size: 13px;
+    color: var(--priao-grey);
+    font-weight: 500;
+    margin-bottom: 8px;
+  }
+  .kpi .value {
+    font-size: 32px;
+    font-weight: 700;
+    color: var(--priao-black);
+    line-height: 1.1;
+  }
+  .kpi .unit {
+    font-size: 14px;
+    color: var(--priao-grey);
+    margin-left: 4px;
+  }
+  .kpi .delta {
+    font-size: 12px;
+    margin-top: 6px;
+    color: var(--priao-grey);
+  }
+  .kpi .delta.up { color: var(--green); }
+  .kpi .delta.warn { color: var(--orange); }
+  .kpi .delta.down { color: var(--red); }
+
+  .row {
+    display: grid;
+    grid-template-columns: 3fr 2fr;
+    gap: 16px;
+    margin-bottom: 24px;
+  }
+  .row-2 {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 16px;
+    margin-bottom: 24px;
+  }
+  .card {
+    background: white;
+    border-radius: 12px;
+    padding: 20px;
+    border: 1px solid var(--border);
+    box-shadow: 0 1px 3px rgba(0,0,0,0.04);
+  }
+  .card h2 {
+    font-size: 16px;
+    font-weight: 700;
+    color: var(--priao-black);
+    margin-bottom: 16px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+  .card h2::before {
+    content: '';
+    width: 4px;
+    height: 18px;
+    background: var(--priao-blue);
+    border-radius: 2px;
+  }
+  .chart-wrapper { position: relative; height: 280px; }
+  .chart-wrapper.small { height: 220px; }
+
+  table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 13px;
+  }
+  th {
+    text-align: left;
+    padding: 10px 8px;
+    font-weight: 600;
+    color: var(--priao-grey);
+    border-bottom: 2px solid var(--border);
+    font-size: 12px;
+    text-transform: uppercase;
+  }
+  td {
+    padding: 10px 8px;
+    border-bottom: 1px solid var(--border);
+  }
+  tr:last-child td { border-bottom: none; }
+  .badge {
+    display: inline-block;
+    padding: 3px 10px;
+    border-radius: 20px;
+    font-size: 11px;
+    font-weight: 600;
+  }
+  .badge.done { background: #d4edda; color: #155724; }
+  .badge.wip { background: #fff3cd; color: #856404; }
+  .badge.new { background: #e9d5ff; color: #553c9a; }
+  .badge.wait { background: #e2e3e5; color: #6c757d; }
+  .badge.cr { background: #cce5ff; color: #004085; }
+  .badge.data { background: #e2e3e5; color: #383d41; }
+  .progress {
+    height: 8px;
+    background: var(--border);
+    border-radius: 4px;
+    overflow: hidden;
+    margin-top: 4px;
+  }
+  .progress-bar {
+    height: 100%;
+    background: var(--priao-blue);
+    transition: width 0.3s;
+  }
+  .progress-bar.full { background: var(--orange); }
+  .progress-bar.over { background: var(--red); }
+
+  .insights {
+    background: white;
+    border-radius: 12px;
+    padding: 20px;
+    border: 1px solid var(--border);
+    box-shadow: 0 1px 3px rgba(0,0,0,0.04);
+  }
+  .insights ul { list-style: none; }
+  .insights li {
+    padding: 10px 12px;
+    margin-bottom: 8px;
+    background: var(--priao-grey-light);
+    border-left: 3px solid var(--priao-blue);
+    border-radius: 6px;
+    font-size: 14px;
+    line-height: 1.5;
+  }
+  .insights li.risk { border-left-color: var(--red); background: #fff5f5; }
+  .insights li.warn { border-left-color: var(--orange); background: #fff8f0; }
+  .insights li.good { border-left-color: var(--green); background: #f0faf3; }
+  .insights li.info { border-left-color: var(--purple); background: #faf5ff; }
+  .insights li strong { color: var(--priao-blue-dark); }
+
+  .footer {
+    text-align: center;
+    margin-top: 24px;
+    padding: 16px;
+    color: var(--priao-grey);
+    font-size: 12px;
+  }
+
+  @media (max-width: 1024px) {
+    .kpi-grid { grid-template-columns: repeat(2, 1fr); }
+    .row, .row-2 { grid-template-columns: 1fr; }
+    .annual-banner { flex-direction: column; align-items: flex-start; }
+    .annual-numbers .used { font-size: 44px; }
+    .annual-numbers .total { font-size: 36px; }
+  }
+</style>
+</head>
+<body>
+
+<div class="header">
+  <h1>Priao IT Man Day Dashboard 2026</h1>
+  <div class="subtitle">สรุปการใช้ Man Day ฝ่าย IT — ปี 2026 (YTD)</div>
+  <div class="meta">Data: Priao MD 2026.xlsx + ISCode 2026.csv (ReceiveDate, Requester) | Generated: 11 มิ.ย. 2026</div>
+</div>
+
+<!-- Annual Quota Banner -->
+<div class="annual-banner">
+  <div class="annual-info">
+    <div class="annual-title">Annual Quota Progress 2026 (Logged in Excel)</div>
+    <div class="annual-numbers">
+      <span class="used">22.50</span>
+      <span class="divider">/</span>
+      <span class="total">96</span>
+      <span class="unit-big">Man Day/ปี</span>
+    </div>
+    <div class="annual-meta">✅ เสร็จสิ้น <strong>20.00 MD</strong> &nbsp;·&nbsp; 🔄 กำลังดำเนินการ <strong>2.50 MD</strong> &nbsp;·&nbsp; ⏳ รอดำเนินการ <strong>0.50* MD</strong> &nbsp;·&nbsp; ประมาณการ รวม: <strong>23.00* / 96 MD</strong> &nbsp;·&nbsp; Quota คงเหลือ <strong>73.00 MD</strong></div>
+
+    <!-- YTD Progress Bar -->
+    <div style="margin-top:14px;">
+      <div style="display:flex; justify-content:space-between; font-size:12px; color:#6c757d; margin-bottom:5px;">
+        <span>ประมาณการ <strong style="color:#25a9e0;">23.00 MD</strong></span>
+        <span style="color:#fd7e14;">▼ YTD Quota (6 เดือน) <strong>48 MD</strong></span>
+        <span>เต็มปี 96 MD</span>
+      </div>
+      <div style="position:relative; background:#e6f6fd; border-radius:8px; height:14px; overflow:visible;">
+        <!-- ประมาณการ bar -->
+        <div style="width:24.0%; background:linear-gradient(90deg,#25a9e0,#1a7eb0); height:100%; border-radius:8px; position:relative;">
+          <span style="position:absolute; right:-2px; top:50%; transform:translateY(-50%); width:4px; height:20px; background:#1a7eb0; border-radius:2px;"></span>
+        </div>
+        <!-- YTD Quota marker at 40/96 = 41.67% -->
+        <div style="position:absolute; left:50.00%; top:-5px; height:24px; width:2px; background:#fd7e14; border-radius:2px;">
+          <div style="position:absolute; bottom:-18px; left:50%; transform:translateX(-50%); font-size:10px; color:#fd7e14; white-space:nowrap; font-weight:600;">48 MD</div>
+        </div>
+      </div>
+      <div style="margin-top:20px; font-size:11px; color:#6c757d; display:flex; gap:16px;">
+        <span style="color:#dc3545;">⚠ ต่ำกว่า YTD Quota <strong style="color:#dc3545;">25.50 MD</strong> (ใช้เพียง 46.9% ของ Quota สะสม 6 เดือน)</span>
+      </div>
+    </div>
+  </div>
+  <div class="annual-circle">
+    <svg viewBox="0 0 120 120" width="120" height="120">
+      <circle cx="60" cy="60" r="52" fill="none" stroke="#e6f6fd" stroke-width="12"/>
+      <circle cx="60" cy="60" r="52" fill="none" stroke="#25a9e0" stroke-width="12"
+        stroke-dasharray="326.7" stroke-dashoffset="248.5"
+        stroke-linecap="round" transform="rotate(-90 60 60)"/>
+      <text x="60" y="58" text-anchor="middle" font-size="22" font-weight="700" fill="#231f20">24.0%</text>
+      <text x="60" y="76" text-anchor="middle" font-size="11" fill="#6c757d">of 96 MD</text>
+    </svg>
+  </div>
+</div>
+
+<!-- KPI -->
+<div class="kpi-grid">
+  <div class="kpi green">
+    <div class="label">เฉลี่ย MD/เดือน (YTD)</div>
+    <div class="value">4.50<span class="unit">MD</span></div>
+    <div class="delta up">ต่ำกว่าเป้า 8 MD/เดือน (-43.8%)</div>
+  </div>
+  <div class="kpi orange">
+    <div class="label">คาดการณ์สิ้นปี (ตามอัตราปัจจุบัน)</div>
+    <div class="value">54.0<span class="unit">MD</span></div>
+    <div class="delta warn">~56.3% ของโควต้า 96 MD — คงเหลือ 42.0 MD</div>
+  </div>
+</div>
+
+<!-- Monthly Chart + Quota Status -->
+<div class="row">
+  <div class="card">
+    <h2>การใช้ Man Day รายเดือน เทียบ Quota (8 MD/เดือน) <span style="font-size:12px;font-weight:500;color:var(--priao-grey);">— by แจ้ง ISCode</span></h2>
+    <div class="chart-wrapper">
+      <canvas id="monthChart"></canvas>
+    </div>
+  </div>
+  <div class="card">
+    <h2>สรุป Quota รายเดือน</h2>
+    <table>
+      <thead>
+        <tr>
+          <th>เดือน</th>
+          <th style="border-left:2px solid #e3e8ee;">📅 MD (by แจ้ง ISCode)</th>
+          <th>%</th>
+          <th style="border-left:2px solid #e3e8ee;">📦 MD (by QuotaOf)</th>
+          <th>%</th>
+        </tr>
+      </thead>
+      <tbody id="combinedTable"></tbody>
+    </table>
+  </div>
+</div>
+
+<!-- 2 charts row -->
+<div class="row-2">
+  <div class="card">
+    <h2>สัดส่วนตามประเภทงาน</h2>
+    <div class="chart-wrapper small">
+      <canvas id="taskTypeChart"></canvas>
+    </div>
+  </div>
+  <div class="card">
+    <h2>สถานะงาน</h2>
+    <div class="chart-wrapper small">
+      <canvas id="statusChart"></canvas>
+    </div>
+  </div>
+</div>
+
+<!-- CR detail table -->
+<div class="card" style="margin-bottom: 24px;">
+  <h2>รายการ CR ทั้งหมด (37 Logged + 3 Pending Log = 40 รายการ)</h2>
+  <table>
+    <thead>
+      <tr>
+        <th>CR No</th>
+        <th>Ref</th>
+        <th>ประเภท</th>
+        <th>Quota</th>
+        <th>MD</th>
+        <th>แจ้ง ISCode</th>
+        <th>Launch</th>
+        <th>สถานะ</th>
+        <th>ผู้ขอ</th>
+        <th>Summary</th>
+      </tr>
+    </thead>
+    <tbody id="crTable"></tbody>
+  </table>
+</div>
+
+
+<div class="footer">
+  Priao Cosmetics IT Department · Generated by Claude · Brand: <span style="color:var(--priao-blue);font-weight:600;">#25a9e0</span> · Source: SharePoint /IT/IS Code/2026/
+</div>
+
+<script>
+const PRIAO_BLUE = '#25a9e0';
+const PRIAO_BLUE_LIGHT = '#7dd0ee';
+const ORANGE = '#fd7e14';
+const GREEN = '#28a745';
+const RED = '#dc3545';
+const PURPLE = '#6f42c1';
+
+Chart.defaults.font.family = 'Sarabun, sans-serif';
+Chart.defaults.color = '#495057';
+
+// ── CR data (must be defined first) ──────────────────────────────
+// Note: MD value with "*" = proposed from docx, not yet logged in Excel
+const crData = [
+  // [CRNo, Type, QuotaOf, MD, ReceiveDate(DD/MM/YYYY), LaunchDate(DD/MM/YYYY), Status, Summary, Requester]
+  // ReceiveDate: Excel → Word (CR Date) → CSV | MD*: proposed from docx, not yet in Excel | FOC: not counted
+  ['-/-',     'Change Request', '',         '-',     '-',          '-',          'WAIT',    '(38) เพิ่มการเก็บข้อมูล PSaleStatus ในเอกสาร DI ณ วันที่ขาย',                           'K.อ้น'],
+  ['-/-',     'Change Request', '',         '-',     '-',          '-',          'WAIT',    '(37) ปรับป้ายราคาสินค้า และทำรายงานสำหรับหน้าสาขา',                                      'K.อ้อย'],
+  ['-/-',     'Change Request', '',         '-',     '-',          '-',          'WAIT',    '(35) ปรับ 2 รายการ (งานหน้าร้าน) ใบเตรียมคืนสินค้า FR / ใบโอนคืน WTFR-WTBR',           'K.อ้น'],
+  ['-/-',     'DATA',           '',         '-',     '09/06/2026', '-',          'PENDING', '(36) อัพเดท PSaleStatus Q3-2026',                                                          'K.อ้น'],
+  ['36/CR18', 'DATA',           '',         '0.50*', '08/06/2026', '-',          'PENDING', '(34) เปลี่ยนหน่วยสินค้า 8858842055519 (บราวอิท) บาร์หลักจาก กล่อง→ตลับ, บาร์รอง แพ็ค→กล่อง', 'K.แคร์'],
+  ['35/CR17', 'Change Request', 'มี.ค. 26', '0.50', '29/05/2026', '05/06/2026', 'DONE',    '(33) เปลี่ยนหน่วยหลักสินค้า จาก ขวด เป็น หลอด',                                         'K.ตอง'],
+  ['34/CR17', 'Change Request', 'มี.ค. 26', '0.50', '28/05/2026', '05/06/2026', 'DONE',    '(32) เปลี่ยนหน่วยหลักสินค้า 2 SKU จาก ชิ้น เป็น แท่ง',                                   'K.ฝ้าย'],
+  ['33/CR17', 'Change Request', 'มี.ค. 26', '1.00', '27/05/2026', '-',          'WIP',     '(30) เพิ่มฟิลด์ที่อยู่ในงานทะเบียนลูกค้า ตำบล/แขวง, อำเภอ/เขต, จังหวัด/รหัสไปรษณีย์', 'K.เพชร'],
+  ['32/CR17', 'Change Request', 'มี.ค. 26', '1.50', '28/05/2026', '-',          'WIP',     '(31) เพิ่ม Filter วันที่ กับประเภทเอกสาร ในรายงาน รายการรอตั้งบัญชีเจ้าหนี้ (AP)',       'K.กุ๊ก'],
+  ['31/CR17', 'DATA',           'มี.ค. 26', 'FOC',  '26/05/2026', '26/05/2026', 'DONE',    '(29) เปลี่ยนบาร์กล่อง และ Ratio ของสินค้า',          'K.น้ำน่าน'],
+  ['30/CR16', 'Change Request', 'มี.ค. 26', '0.50', '20/05/2026', '02/06/2026', 'DONE',    '(28) เพิ่มคอลัมน์ PSaleStatus ไฟล์ Excel ใบเบิก SF', 'K.อ้อย'],
+  ['29/CR15', 'Change Request', 'มี.ค. 26', '1.00', '08/05/2026', '02/06/2026', 'DONE',    '(27) เพิ่มคอลัมน์ภาษีซื้อ Export AP',        'K.บิว'],
+  ['28/CR14', 'DATA',           'มี.ค. 26', '0.25', '06/05/2026', '06/05/2026', 'DONE', '(26) อัพเดท SubVend 7,951 rows',          'K.อ้น'],
+  ['27/CR14', 'Change Request', 'มี.ค. 26', '0.50', '04/05/2026', '18/05/2026', 'DONE', '(25) ปรับชื่อฟอร์มใบกำกับ A4',           'K.ป๊อป'],
+  ['26/CR14', 'DATA',           'มี.ค. 26', 'FOC',  '28/04/2026', '28/04/2026', 'DONE', '(24) ลบบาร์โค้ดหน่วยแพ็ค 3 SKU',         'K.บี๋'],
+  ['25/CR13', 'Change Request', 'มี.ค. 26', '2.00', '23/04/2026', '18/05/2026', 'DONE', '(23) ออเดอร์ส่งด่วน ไม่อนุญาตพิมพ์ AWB', 'K.ป๊อป'],
+  ['24/CR13', 'DATA',           'ก.พ. 26',  '0.75',  '23/04/2026', '27/04/2026', 'DONE', '(22) อัพเดท Min Max 8 สาขา',              'K.อ้น'],
+  ['23/CR13', 'Change Request', 'ก.พ. 26',  '0.75',  '20/04/2026', '28/04/2026', 'DONE', '(21) เพิ่มราคาขาย Shop+PSale ใน HH',      'K.น้ำอ้อย'],
+  ['22/CR12', 'DATA',           'ก.พ. 26',  '0.25',  '02/04/2026', '07/04/2026', 'DONE', '(20) PSaleStatus Q2-2026 7,734 rows',      'K.อ้น'],
+  ['21/CR12', 'DATA',           'ก.พ. 26',  'FOC',   '27/03/2026', '27/03/2026', 'DONE', '(19) เปลี่ยน Ratio 8858842011294',         'K.แคร์'],
+  ['20/CR11', 'DATA',           'ก.พ. 26',  '0.25',  '24/03/2026', '26/03/2026', 'DONE', '(18) อัพเดท Min FG',                      'K.อ้น'],
+  ['19/CR11', 'DATA',           'ก.พ. 26',  '0.25',  '24/03/2026', '26/03/2026', 'DONE', '(17) แก้ส่วนลด DR-260300404',             'K.ป๊อป'],
+  ['18/CR10', 'Change Request', 'ก.พ. 26',  '1.00',  '27/02/2026', '11/03/2026', 'DONE', '(15) ปรับเงื่อนไขค้นหา ProductStock',     'K.อ้น'],
+  ['17/CR10', 'DATA',           'ก.พ. 26',  'FOC',   '28/02/2026', '28/02/2026', 'DONE', '(16) อัพเดทชื่อสินค้าให้ตรงทะเบียน',     'K.ป๊อป'],
+  ['16/CR09', 'DATA',           'ก.พ. 26',  'FOC',   '24/02/2026', '24/02/2026', 'DONE', '(14) ขอ DB ทดสอบเชื่อม AI (K.Saran)',     'K.โอ๊ต'],
+  ['15/CR09', 'DATA',           'ก.พ. 26',  '0.25',  '23/02/2026', '24/02/2026', 'DONE', '(13) เปลี่ยนหน่วย กล่อง→ขวด 1 SKU',      'K.บี๋'],
+  ['14/CR08', 'Change Request', 'ก.พ. 26',  '2.00',  '11/02/2026', '10/03/2026', 'DONE', '(10) รายงานคอนเฟิร์ม SO Onetime',         'K.แป้ง'],
+  ['13/CR08', 'Change Request', 'ก.พ. 26',  '2.50',  '11/02/2026', '10/03/2026', 'DONE', '(10) ListWaitingOrder ปุ่ม',              'K.แป้ง'],
+  ['12/CR07', 'DATA',           'ม.ค. 26',  'FOC',   '12/02/2026', '13/02/2026', 'DONE', '(12) เปลี่ยนบาร์กล่อง+Ratio',            'K.น้ำน่าน'],
+  ['11/CR07', 'DATA',           'ม.ค. 26',  '0.50',  '11/02/2026', '13/02/2026', 'DONE', '(9) เปลี่ยนหน่วย กล่อง→ถุง',             'K.ตอง'],
+  ['10/CR07', 'DATA',           'ม.ค. 26',  '1.00',  '11/02/2026', '16/02/2026', 'DONE', '(11) อัพเดทราคา 1,710 บรรทัด',           'K.อ้น'],
+  ['09/CR06', 'Change Request', 'ม.ค. 26',  '1.00',  '05/02/2026', '10/02/2026', 'DONE', '(8) เพิ่ม Filter FGStore',                'K.แป้ง'],
+  ['08/CR06', 'Change Request', 'ม.ค. 26',  'FOC',   '05/02/2026', '10/02/2026', 'DONE', '(8) ปรับความถี่ Stock 1 ชม.',             'K.แป้ง'],
+  ['07/CR05', 'Change Request', 'ม.ค. 26',  '1.25',  '03/02/2026', '11/02/2026', 'DONE', '(7) เพิ่มคอลัมน์ SubVendor ListApproveBO','K.อ้น'],
+  ['06/CR04', 'DATA',           'ม.ค. 26',  '0.25',  '23/01/2026', '27/01/2026', 'DONE', '(6) SubVend ProductMaster 7,789 rows',    'K.อ้น'],
+  ['05/CR04', 'DATA',           'ม.ค. 26',  'FOC',   '13/01/2026', '13/01/2026', 'DONE', '(5) แก้ ratio 8858760224516',             'K.แคร์'],
+  ['04/CR03', 'DATA',           'ม.ค. 26',  'FOC',   '13/01/2026', '13/01/2026', 'DONE', '(4) สร้างหน่วย กล่อง 8859497306025',     'K.ปีใหม่'],
+  ['03/CR03', 'Change Request', 'ม.ค. 26',  '2.00',  '12/01/2026', '28/01/2026', 'DONE', '(3) เพิ่มฟังก์ชั่นจัดการ Location',      'K.โอ๊ต'],
+  ['02/CR02', 'DATA',           'ม.ค. 26',  '0.50',  '07/01/2026', '13/01/2026', 'DONE', '(2) ปรับสถานะ BO FromSF Confirm→Delete 7,091 รายการ', 'K.อ้น'],
+  ['01/CR01', 'DATA',           'ม.ค. 26',  '0.25',  '05/01/2026', '06/01/2026', 'DONE', '(1) PSaleStatus Q1-2026',                 'K.อ้น']
+];
+
+// ── helpers ──────────────────────────────────────────────────────
+function parseReceiveDate(str) {
+  if (!str || str === '-') return null;
+  const p = str.split('/');
+  if (p.length !== 3) return null;
+  const day = parseInt(p[0], 10), month = parseInt(p[1], 10), year = parseInt(p[2], 10);
+  if (isNaN(day) || isNaN(month) || isNaN(year) || month < 1 || month > 12) return null;
+  return { day, month, year };
+}
+function parseMD(s) {
+  if (!s || s === 'FOC' || s === 'FOC*') return 0;
+  return parseFloat(s.replace('*', '')) || 0;
+}
+
+// ── compute monthly totals by ReceiveDate ─────────────────────────
+const MONTH_TH = ['ม.ค.','ก.พ.','มี.ค.','เม.ย.','พ.ค.','มิ.ย.','ก.ค.','ส.ค.','ก.ย.','ต.ค.','พ.ย.','ธ.ค.'];
+const monthlyLogged  = new Array(12).fill(0);
+const monthlyPending = new Array(12).fill(0);
+const monthlyAnomaly = new Array(12).fill(false); // months outside reasonable range
+
+crData.forEach(row => {
+  const d = parseReceiveDate(row[4]);
+  if (!d || d.year !== 2026) return;
+  const md = parseMD(row[3]);
+  const mi = d.month - 1; // 0-indexed
+  if (row[6] === 'PENDING') {
+    monthlyPending[mi] += md;
+  } else {
+    monthlyLogged[mi] += md;
+  }
+});
+
+// Detect which months have data
+const activeMonths = [];
+for (let m = 0; m < 12; m++) {
+  if (monthlyLogged[m] > 0 || monthlyPending[m] > 0) activeMonths.push(m);
+}
+// Always include Jan-May (indices 0-4)
+for (let m = 0; m <= 4; m++) {
+  if (!activeMonths.includes(m)) activeMonths.push(m);
+}
+activeMonths.sort((a, b) => a - b);
+
+// Mark months past current month (May=4) that have data as anomalies
+const TODAY_MONTH = 5; // Jun = index 5
+activeMonths.forEach(m => { if (m > TODAY_MONTH && monthlyLogged[m] > 0) monthlyAnomaly[m] = true; });
+
+const chartLabels  = activeMonths.map(m => MONTH_TH[m] + ' 26');
+const loggedColors = activeMonths.map(m => {
+  if (monthlyAnomaly[m]) return '#adb5bd'; // grey for anomaly months
+  const v = monthlyLogged[m];
+  return v >= 8 ? ORANGE : PRIAO_BLUE;
+});
+const loggedData  = activeMonths.map(m => monthlyLogged[m]);
+const pendingData = activeMonths.map(m => monthlyPending[m]);
+const quotaData   = activeMonths.map(() => 8);
+
+// ── Monthly chart ─────────────────────────────────────────────────
+new Chart(document.getElementById('monthChart'), {
+  type: 'bar',
+  data: {
+    labels: chartLabels,
+    datasets: [
+      {
+        label: 'Man Day ใช้ (Logged)',
+        data: loggedData,
+        backgroundColor: loggedColors,
+        borderRadius: 6,
+        order: 3
+      },
+      {
+        label: 'Pending Log (docx)',
+        data: pendingData,
+        backgroundColor: PURPLE,
+        borderRadius: 6,
+        order: 2
+      },
+      {
+        label: 'Quota (8 MD/เดือน)',
+        type: 'line',
+        data: quotaData,
+        borderColor: RED,
+        borderDash: [6, 4],
+        borderWidth: 2,
+        pointRadius: 0,
+        fill: false,
+        order: 1
+      }
+    ]
+  },
+  options: {
+    responsive: true,
+    maintainAspectRatio: false,
+    scales: {
+      x: { stacked: true },
+      y: { stacked: true, beginAtZero: true, title: { display: true, text: 'Man Day' } }
+    },
+    plugins: {
+      legend: { position: 'bottom' },
+      tooltip: {
+        callbacks: {
+          afterLabel: (ctx) => {
+            if (ctx.dataset.label === 'Man Day ใช้ (Logged)' && ctx.raw > 0) {
+              const mi = activeMonths[ctx.dataIndex];
+              const note = monthlyAnomaly[mi] ? ' ⚠️ ReceiveDate อาจผิด format' : '';
+              return '% ของ Quota: ' + ((ctx.raw / 8) * 100).toFixed(1) + '%' + note;
+            }
+          }
+        }
+      }
+    }
+  }
+});
+
+// ── Combined Quota table (ReceiveDate + QuotaOf side by side) ────
+const quotaOrder = ['ม.ค. 26','ก.พ. 26','มี.ค. 26','เม.ย. 26','พ.ค. 26','มิ.ย. 26','ก.ค. 26','ส.ค. 26','ก.ย. 26','ต.ค. 26','พ.ย. 26','ธ.ค. 26'];
+
+// Build QuotaOf groups
+const quotaOfGroups = {};
+crData.forEach(row => {
+  const key = row[2] || '—';
+  const md = parseMD(row[3]);
+  const status = row[6];
+  if (!quotaOfGroups[key]) quotaOfGroups[key] = { logged: 0, pending: 0 };
+  if (status === 'PENDING') quotaOfGroups[key].pending += md;
+  else quotaOfGroups[key].logged += md;
+});
+
+// Collect all month keys from both sources
+const allMonthLabels = [...new Set([
+  ...activeMonths.map(m => MONTH_TH[m] + ' 26'),
+  ...Object.keys(quotaOfGroups)
+])].sort((a, b) => {
+  const ia = quotaOrder.indexOf(a), ib = quotaOrder.indexOf(b);
+  if (ia === -1 && ib === -1) return 0;
+  if (ia === -1) return 1;
+  if (ib === -1) return -1;
+  return ia - ib;
+});
+
+function makeBar(pct, barClass) {
+  return `<div class="progress"><div class="progress-bar ${barClass}" style="width:${Math.min(pct,100)}%"></div></div>`;
+}
+
+const combinedTableEl = document.getElementById('combinedTable');
+allMonthLabels.forEach(label => {
+  // ReceiveDate side
+  const mIdx = MONTH_TH.findIndex(th => label.startsWith(th));
+  const rdLogged  = mIdx >= 0 ? (monthlyLogged[mIdx]  || 0) : 0;
+  const rdPending = mIdx >= 0 ? (monthlyPending[mIdx] || 0) : 0;
+  const rdPct = (rdLogged / 8 * 100);
+  const rdPendingHtml = rdPending > 0 ? ` <span style="color:#6f42c1;font-size:11px;">(+${rdPending.toFixed(2)}*)</span>` : '';
+
+  // QuotaOf side
+  const qg = quotaOfGroups[label] || { logged: 0, pending: 0 };
+  const qLogged = qg.logged, qPending = qg.pending;
+  const qPct = (qLogged / 8 * 100);
+  const qPendingHtml = qPending > 0 ? ` <span style="color:#6f42c1;font-size:11px;">(+${qPending.toFixed(2)}*)</span>` : '';
+
+  const isLabelUnassigned = label === '—';
+  const rowLabel = isLabelUnassigned ? `<span style="color:#6c757d;">ยังไม่กำหนด</span>` : `<strong>${label}</strong>`;
+
+  combinedTableEl.innerHTML += `
+    <tr>
+      <td>${rowLabel}</td>
+      <td style="border-left:2px solid #e3e8ee;">${rdLogged > 0 || rdPending > 0 ? rdLogged.toFixed(2)+' / 8'+rdPendingHtml : '<span style="color:#ccc;">—</span>'}</td>
+      <td>${rdLogged > 0 ? rdPct.toFixed(1)+'%'+makeBar(rdPct, rdPct>=100?'full':'') : ''}</td>
+      <td style="border-left:2px solid #e3e8ee;">${qLogged > 0 || qPending > 0 ? qLogged.toFixed(2)+' / 8'+qPendingHtml : '<span style="color:#ccc;">—</span>'}</td>
+      <td>${qLogged > 0 ? qPct.toFixed(1)+'%'+makeBar(qPct, qPct>=100?'full':'') : ''}</td>
+    </tr>`;
+});
+
+// Task type chart (Excel only — actual logged MD)
+new Chart(document.getElementById('taskTypeChart'), {
+  type: 'doughnut',
+  data: {
+    labels: ['Change Request (15.50 MD)', 'DATA (4.50 MD)'],
+    datasets: [{
+      data: [15.50, 4.50],
+      backgroundColor: [PRIAO_BLUE, PRIAO_BLUE_LIGHT],
+      borderWidth: 2,
+      borderColor: '#fff'
+    }]
+  },
+  options: {
+    responsive: true,
+    maintainAspectRatio: false,
+    plugins: {
+      legend: { position: 'bottom' },
+      tooltip: {
+        callbacks: {
+          label: (ctx) => `${ctx.label}: ${ctx.raw} MD (${((ctx.raw/20.00)*100).toFixed(1)}%)`
+        }
+      }
+    }
+  }
+});
+
+// Status chart
+new Chart(document.getElementById('statusChart'), {
+  type: 'doughnut',
+  data: {
+    labels: ['เสร็จสิ้น (33)', 'กำลังดำเนินการ (2)', 'รอดำเนินการ (2)', 'รอแจ้ง ISCode (3)'],
+    datasets: [{
+      data: [33, 2, 2, 3],
+      backgroundColor: [GREEN, ORANGE, PURPLE, '#adb5bd'],
+      borderWidth: 2,
+      borderColor: '#fff'
+    }]
+  },
+  options: {
+    responsive: true,
+    maintainAspectRatio: false,
+    plugins: {
+      legend: { position: 'bottom' },
+      tooltip: {
+        callbacks: {
+          label: (ctx) => `${ctx.label}: ${ctx.raw} รายการ`
+        }
+      }
+    }
+  }
+});
+
+
+const tbody = document.getElementById('crTable');
+crData.forEach(row => {
+  const tr = document.createElement('tr');
+  const taskBadge = row[1] === 'Change Request' ? 'cr' : 'data';
+  const statusClass = row[6] === 'DONE' ? 'done' : (row[6] === 'WIP' ? 'wip' : (row[6] === 'WAIT' ? 'wait' : 'new'));
+  const statusLabel = {'DONE':'เสร็จสิ้น','WIP':'กำลังดำเนินการ','PENDING':'รอดำเนินการ','WAIT':'รอแจ้ง ISCode'}[row[6]] || row[6];
+  const mdDisplay = row[3].includes('*') ? `<span style="color:#6f42c1;" title="Proposed from docx, not yet logged">${row[3]}</span>` : row[3];
+  // Extract running CR number from format "25/CR13" → "CR-25"
+  const crNumber = row[0].startsWith('-') ? '<span style="color:#adb5bd;">รอ CR</span>' : 'CR-' + row[0].split('/')[0];
+  const requester = row[8] || '';
+  tr.innerHTML = `
+    <td><strong style="color:#25a9e0;">${crNumber}</strong></td>
+    <td style="color:#6c757d;font-size:12px;">${row[0]}</td>
+    <td><span class="badge ${taskBadge}">${row[1]}</span></td>
+    <td>${row[2]}</td>
+    <td><strong>${mdDisplay}</strong></td>
+    <td>${row[4]}</td>
+    <td>${row[5]}</td>
+    <td><span class="badge ${statusClass}">${statusLabel}</span></td>
+    <td style="font-size:12px;color:#25a9e0;">${requester}</td>
+    <td style="font-size:12px;color:#666">${row[7]}</td>
+  `;
+  tbody.appendChild(tr);
+});
+</script>
+
+</body>
+</html>
