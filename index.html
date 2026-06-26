@@ -780,16 +780,7 @@ crData.forEach(row => {
 });
 
 // ── datetime ──────────────────────────────────────────────────────
-(function() {
-  const MONTH_TH_FULL = ['ม.ค.','ก.พ.','มี.ค.','เม.ย.','พ.ค.','มิ.ย.','ก.ค.','ส.ค.','ก.ย.','ต.ค.','พ.ย.','ธ.ค.'];
-  const now = new Date();
-  const d = now.getDate();
-  const m = MONTH_TH_FULL[now.getMonth()];
-  const y = now.getFullYear() + 543;
-  const hh = String(now.getHours()).padStart(2,'0');
-  const mm = String(now.getMinutes()).padStart(2,'0');
-  document.getElementById('genDatetime').textContent = d + ' ' + m + ' ' + y + ' เวลา ' + hh + ':' + mm + ' น.';
-})();
+document.getElementById('genDatetime').textContent = '26 มิ.ย. 2569 เวลา 06:39 น.';
 </script>
 
 </body>
