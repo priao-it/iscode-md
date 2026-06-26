@@ -287,7 +287,7 @@
 <div class="header">
   <h1>Priao IT Man Day Dashboard 2026</h1>
   <div class="subtitle">สรุปการใช้ Man Day ฝ่าย IT — ปี 2026 (YTD)</div>
-  <div class="meta">Data: Priao MD 2026.xlsx + ISCode 2026.csv (ReceiveDate, Requester) | Generated: 11 มิ.ย. 2026</div>
+  <div class="meta">Data: Priao MD 2026.xlsx + ISCode 2026.csv (ReceiveDate, Requester) | Generated: 26 มิ.ย. 2026</div>
 </div>
 
 <!-- Annual Quota Banner -->
@@ -300,18 +300,18 @@
       <span class="total">96</span>
       <span class="unit-big">Man Day/ปี</span>
     </div>
-    <div class="annual-meta">✅ เสร็จสิ้น <strong>20.00 MD</strong> &nbsp;·&nbsp; 🔄 กำลังดำเนินการ <strong>2.50 MD</strong> &nbsp;·&nbsp; ⏳ รอดำเนินการ <strong>0.50* MD</strong> &nbsp;·&nbsp; ประมาณการ รวม: <strong>23.00* / 96 MD</strong> &nbsp;·&nbsp; Quota คงเหลือ <strong>73.00 MD</strong></div>
+    <div class="annual-meta">✅ เสร็จสิ้น <strong>20.00 MD</strong> &nbsp;·&nbsp; 🔄 กำลังดำเนินการ <strong>2.50 MD</strong> &nbsp;·&nbsp; ⏳ รอดำเนินการ <strong>2.25* MD</strong> &nbsp;·&nbsp; ประมาณการ รวม: <strong>24.75* / 96 MD</strong> &nbsp;·&nbsp; Quota คงเหลือ <strong>71.25 MD</strong></div>
 
     <!-- YTD Progress Bar -->
     <div style="margin-top:14px;">
       <div style="display:flex; justify-content:space-between; font-size:12px; color:#6c757d; margin-bottom:5px;">
-        <span>ประมาณการ <strong style="color:#25a9e0;">23.00 MD</strong></span>
+        <span>ประมาณการ <strong style="color:#25a9e0;">24.75 MD</strong></span>
         <span style="color:#fd7e14;">▼ YTD Quota (6 เดือน) <strong>48 MD</strong></span>
         <span>เต็มปี 96 MD</span>
       </div>
       <div style="position:relative; background:#e6f6fd; border-radius:8px; height:14px; overflow:visible;">
         <!-- ประมาณการ bar -->
-        <div style="width:24.0%; background:linear-gradient(90deg,#25a9e0,#1a7eb0); height:100%; border-radius:8px; position:relative;">
+        <div style="width:25.8%; background:linear-gradient(90deg,#25a9e0,#1a7eb0); height:100%; border-radius:8px; position:relative;">
           <span style="position:absolute; right:-2px; top:50%; transform:translateY(-50%); width:4px; height:20px; background:#1a7eb0; border-radius:2px;"></span>
         </div>
         <!-- YTD Quota marker at 40/96 = 41.67% -->
@@ -320,7 +320,7 @@
         </div>
       </div>
       <div style="margin-top:20px; font-size:11px; color:#6c757d; display:flex; gap:16px;">
-        <span style="color:#dc3545;">⚠ ต่ำกว่า YTD Quota <strong style="color:#dc3545;">25.50 MD</strong> (ใช้เพียง 46.9% ของ Quota สะสม 6 เดือน)</span>
+        <span style="color:#dc3545;">⚠ ต่ำกว่า YTD Quota <strong style="color:#dc3545;">23.25 MD</strong> (ใช้เพียง 51.6% ของ Quota สะสม 6 เดือน)</span>
       </div>
     </div>
   </div>
@@ -328,9 +328,9 @@
     <svg viewBox="0 0 120 120" width="120" height="120">
       <circle cx="60" cy="60" r="52" fill="none" stroke="#e6f6fd" stroke-width="12"/>
       <circle cx="60" cy="60" r="52" fill="none" stroke="#25a9e0" stroke-width="12"
-        stroke-dasharray="326.7" stroke-dashoffset="248.5"
+        stroke-dasharray="326.7" stroke-dashoffset="242.4"
         stroke-linecap="round" transform="rotate(-90 60 60)"/>
-      <text x="60" y="58" text-anchor="middle" font-size="22" font-weight="700" fill="#231f20">24.0%</text>
+      <text x="60" y="58" text-anchor="middle" font-size="22" font-weight="700" fill="#231f20">25.8%</text>
       <text x="60" y="76" text-anchor="middle" font-size="11" fill="#6c757d">of 96 MD</text>
     </svg>
   </div>
@@ -393,7 +393,7 @@
 
 <!-- CR detail table -->
 <div class="card" style="margin-bottom: 24px;">
-  <h2>รายการ CR ทั้งหมด (37 Logged + 3 Pending Log = 40 รายการ)</h2>
+  <h2>รายการ CR ทั้งหมด (40 Logged + 2 Pending Log = 42 รายการ)</h2>
   <table>
     <thead>
       <tr>
@@ -434,10 +434,12 @@ Chart.defaults.color = '#495057';
 const crData = [
   // [CRNo, Type, QuotaOf, MD, ReceiveDate(DD/MM/YYYY), LaunchDate(DD/MM/YYYY), Status, Summary, Requester]
   // ReceiveDate: Excel → Word (CR Date) → CSV | MD*: proposed from docx, not yet in Excel | FOC: not counted
-  ['-/-',     'Change Request', '',         '-',     '-',          '-',          'WAIT',    '(38) เพิ่มการเก็บข้อมูล PSaleStatus ในเอกสาร DI ณ วันที่ขาย',                           'K.อ้น'],
+  ['-/-',     'Change Request', '',         '-',     '-',          '-',          'WAIT',    '(40) เพิ่มการเก็บข้อมูล PSaleStatus ในเอกสาร DI ณ วันที่ขาย',                           'K.อ้น'],
   ['-/-',     'Change Request', '',         '-',     '-',          '-',          'WAIT',    '(37) ปรับป้ายราคาสินค้า และทำรายงานสำหรับหน้าสาขา',                                      'K.อ้อย'],
-  ['-/-',     'Change Request', '',         '-',     '-',          '-',          'WAIT',    '(35) ปรับ 2 รายการ (งานหน้าร้าน) ใบเตรียมคืนสินค้า FR / ใบโอนคืน WTFR-WTBR',           'K.อ้น'],
-  ['-/-',     'DATA',           '',         '-',     '09/06/2026', '-',          'PENDING', '(36) อัพเดท PSaleStatus Q3-2026',                                                          'K.อ้น'],
+  ['40/CR20', 'DATA',           '',         '0.25*', '19/06/2026', '-',          'PENDING', '(39) เจาะแก้ไขยอดในเอกสาร VI-260600280 / GR-260600262',                                   '-'],
+  ['39/CR20', 'DATA',           '',         'FOC',   '19/06/2026', '-',          'PENDING', '(38) เปลี่ยน Ratio บาร์กล่อง 8859433790352 จาก 6→3 (เมอร์เรซกา)',                        'K.แคร์'],
+  ['37/CR19', 'Change Request', '',         '1.25*', '08/06/2026', '-',          'PENDING', '(35) งานหน้าร้าน ปรับตัวเลือกสาเหตุ FR และ WTFR/WTBR แสดงสาเหตุ-หมายเหตุบนใบปิดลัง',  'K.อ้น'],
+  ['38/CR19', 'DATA',           '',         '0.25*', '09/06/2026', '-',          'PENDING', '(36) อัพเดท PSaleStatus Q3-2026 (8,080 rows)',                                             'K.อ้น'],
   ['36/CR18', 'DATA',           '',         '0.50*', '08/06/2026', '-',          'PENDING', '(34) เปลี่ยนหน่วยสินค้า 8858842055519 (บราวอิท) บาร์หลักจาก กล่อง→ตลับ, บาร์รอง แพ็ค→กล่อง', 'K.แคร์'],
   ['35/CR17', 'Change Request', 'มี.ค. 26', '0.50', '29/05/2026', '05/06/2026', 'DONE',    '(33) เปลี่ยนหน่วยหลักสินค้า จาก ขวด เป็น หลอด',                                         'K.ตอง'],
   ['34/CR17', 'Change Request', 'มี.ค. 26', '0.50', '28/05/2026', '05/06/2026', 'DONE',    '(32) เปลี่ยนหน่วยหลักสินค้า 2 SKU จาก ชิ้น เป็น แท่ง',                                   'K.ฝ้าย'],
@@ -678,9 +680,9 @@ new Chart(document.getElementById('taskTypeChart'), {
 new Chart(document.getElementById('statusChart'), {
   type: 'doughnut',
   data: {
-    labels: ['เสร็จสิ้น (33)', 'กำลังดำเนินการ (2)', 'รอดำเนินการ (2)', 'รอแจ้ง ISCode (3)'],
+    labels: ['เสร็จสิ้น (33)', 'กำลังดำเนินการ (2)', 'รอดำเนินการ (5)', 'รอแจ้ง ISCode (2)'],
     datasets: [{
-      data: [33, 2, 2, 3],
+      data: [33, 2, 5, 2],
       backgroundColor: [GREEN, ORANGE, PURPLE, '#adb5bd'],
       borderWidth: 2,
       borderColor: '#fff'
@@ -712,20 +714,4 @@ crData.forEach(row => {
   const crNumber = row[0].startsWith('-') ? '<span style="color:#adb5bd;">รอ CR</span>' : 'CR-' + row[0].split('/')[0];
   const requester = row[8] || '';
   tr.innerHTML = `
-    <td><strong style="color:#25a9e0;">${crNumber}</strong></td>
-    <td style="color:#6c757d;font-size:12px;">${row[0]}</td>
-    <td><span class="badge ${taskBadge}">${row[1]}</span></td>
-    <td>${row[2]}</td>
-    <td><strong>${mdDisplay}</strong></td>
-    <td>${row[4]}</td>
-    <td>${row[5]}</td>
-    <td><span class="badge ${statusClass}">${statusLabel}</span></td>
-    <td style="font-size:12px;color:#25a9e0;">${requester}</td>
-    <td style="font-size:12px;color:#666">${row[7]}</td>
-  `;
-  tbody.appendChild(tr);
-});
-</script>
-
-</body>
-</html>
+    <td><strong style="color:#25a9e0
