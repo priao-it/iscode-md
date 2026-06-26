@@ -304,25 +304,31 @@
     td { padding: 8px 6px; }
   }
   @media (max-width: 480px) {
-    body { padding: 8px; }
-    .header { padding: 16px; }
+    body { padding: 4px 0; }
+    .header { padding: 14px 12px; border-radius: 0; margin-bottom: 4px; }
     .header h1 { font-size: 17px; }
+    .annual-banner { padding: 14px 12px; border-radius: 0; margin-bottom: 4px; }
     .annual-numbers .used { font-size: 34px; }
     .annual-numbers .total { font-size: 28px; }
     .annual-circle { display: none; }
-    .kpi { padding: 12px 14px; }
+    .kpi-grid { gap: 4px; margin-bottom: 4px; padding: 0 4px; }
+    .kpi { padding: 12px 10px; border-radius: 8px; }
     .kpi .value { font-size: 22px; }
     .kpi .label { font-size: 12px; }
     .kpi .delta { font-size: 11px; }
-    .card { padding: 12px; }
+    .row, .row-2 { gap: 4px; margin-bottom: 4px; padding: 0 4px; }
+    .card { padding: 12px; border-radius: 8px; }
     .card h2 { font-size: 14px; margin-bottom: 12px; }
     .chart-wrapper { height: 210px; }
     .chart-wrapper.small { height: 180px; }
-    table { font-size: 11px; min-width: 480px; }
+    table { font-size: 11px; }
     th { font-size: 10px; padding: 6px 5px; }
     td { padding: 7px 5px; }
     .badge { padding: 2px 7px; font-size: 10px; }
     .insights li { font-size: 13px; padding: 8px 10px; }
+    div[style*="margin-bottom: 24px"] { margin-bottom: 4px !important; }
+    .card[style*="margin-bottom"] { margin-bottom: 4px !important; border-radius: 8px; }
+    .footer { padding: 10px 12px; }
   }
 </style>
 </head>
