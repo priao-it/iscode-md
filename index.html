@@ -337,7 +337,7 @@
 <div class="header">
   <h1>Priao IT Man Day Dashboard 2026</h1>
   <div class="subtitle">สรุปการใช้ Man Day ฝ่าย IT — ปี 2026 (YTD)</div>
-  <div class="meta">Data: Priao MD 2026.xlsx + ISCode 2026.csv (ReceiveDate, Requester) | Generated: 26 มิ.ย. 2026</div>
+  <div class="meta" id="genMeta">Data: Priao MD 2026.xlsx + ISCode 2026.csv (ReceiveDate, Requester) | Generated: <span id="genDatetime"></span></div>
 </div>
 
 <!-- Annual Quota Banner -->
@@ -778,6 +778,18 @@ crData.forEach(row => {
   `;
   tbody.appendChild(tr);
 });
+
+// ── datetime ──────────────────────────────────────────────────────
+(function() {
+  const MONTH_TH_FULL = ['ม.ค.','ก.พ.','มี.ค.','เม.ย.','พ.ค.','มิ.ย.','ก.ค.','ส.ค.','ก.ย.','ต.ค.','พ.ย.','ธ.ค.'];
+  const now = new Date();
+  const d = now.getDate();
+  const m = MONTH_TH_FULL[now.getMonth()];
+  const y = now.getFullYear() + 543;
+  const hh = String(now.getHours()).padStart(2,'0');
+  const mm = String(now.getMinutes()).padStart(2,'0');
+  document.getElementById('genDatetime').textContent = d + ' ' + m + ' ' + y + ' เวลา ' + hh + ':' + mm + ' น.';
+})();
 </script>
 
 </body>
