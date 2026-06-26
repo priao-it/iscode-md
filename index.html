@@ -345,12 +345,12 @@
   <div class="annual-info">
     <div class="annual-title">Annual Quota Progress 2026 (Logged in Excel)</div>
     <div class="annual-numbers">
-      <span class="used">22.50</span>
+      <span class="used">24.75</span>
       <span class="divider">/</span>
       <span class="total">96</span>
       <span class="unit-big">Man Day/ปี</span>
     </div>
-    <div class="annual-meta">✅ เสร็จสิ้น <strong>20.00 MD</strong> &nbsp;·&nbsp; 🔄 กำลังดำเนินการ <strong>2.50 MD</strong> &nbsp;·&nbsp; ⏳ รอดำเนินการ <strong>2.25* MD</strong> &nbsp;·&nbsp; ประมาณการ รวม: <strong>24.75* / 96 MD</strong> &nbsp;·&nbsp; Quota คงเหลือ <strong>71.25 MD</strong></div>
+    <div class="annual-meta">✅ เสร็จสิ้น <strong>24.75 MD</strong> &nbsp;·&nbsp; ⏳ รอดำเนินการ <strong>1 รายการ (MD ยังไม่ระบุ)</strong> &nbsp;·&nbsp; ประมาณการรวม: <strong>24.75 / 96 MD</strong> &nbsp;·&nbsp; Quota คงเหลือ <strong>71.25 MD</strong></div>
 
     <!-- YTD Progress Bar -->
     <div style="margin-top:14px;">
@@ -390,13 +390,13 @@
 <div class="kpi-grid">
   <div class="kpi green">
     <div class="label">เฉลี่ย MD/เดือน (YTD)</div>
-    <div class="value">4.50<span class="unit">MD</span></div>
-    <div class="delta up">ต่ำกว่าเป้า 8 MD/เดือน (-43.8%)</div>
+    <div class="value">4.13<span class="unit">MD</span></div>
+    <div class="delta up">ต่ำกว่าเป้า 8 MD/เดือน (-48.4%)</div>
   </div>
   <div class="kpi orange">
     <div class="label">คาดการณ์สิ้นปี (ตามอัตราปัจจุบัน)</div>
-    <div class="value">54.0<span class="unit">MD</span></div>
-    <div class="delta warn">~56.3% ของโควต้า 96 MD — คงเหลือ 42.0 MD</div>
+    <div class="value">49.5<span class="unit">MD</span></div>
+    <div class="delta warn">~51.6% ของโควต้า 96 MD — คงเหลือ 46.5 MD</div>
   </div>
 </div>
 
@@ -443,7 +443,7 @@
 
 <!-- CR detail table -->
 <div class="card" style="margin-bottom: 24px;">
-  <h2>รายการ CR ทั้งหมด (41 Logged + 2 Pending Log = 43 รายการ)</h2>
+  <h2>รายการ CR ทั้งหมด (40 Logged + 1 Pending Log + 2 Wait = 43 รายการ)</h2>
   <div class="table-wrap"><table>
     <thead>
       <tr>
@@ -486,16 +486,16 @@ const crData = [
   // ReceiveDate: Excel → Word (CR Date) → CSV | MD*: proposed from docx, not yet in Excel | FOC: not counted
   ['-/-',     'Change Request', '',         '-',     '-',          '-',          'WAIT',    '(40) เพิ่มการเก็บข้อมูล PSaleStatus ในเอกสาร DI ณ วันที่ขาย',                           'K.อ้น'],
   ['-/-',     'Change Request', '',         '-',     '-',          '-',          'WAIT',    '(41) ปรับป้ายราคาสินค้า และทำรายงานสำหรับหน้าสาขา',                                      'K.อ้อย'],
-  ['40/CR20', 'DATA',           '',         '0.25*', '19/06/2026', '-',          'PENDING', '(39) เจาะแก้ไขยอดในเอกสาร VI-260600280 / GR-260600262',                                   'K.นุ๊ก'],
-  ['39/CR20', 'DATA',           '',         'FOC',   '19/06/2026', '-',          'PENDING', '(38) เปลี่ยน Ratio บาร์กล่อง 8859433790352 จาก 6→3 (เมอร์เรซกา)',                        'K.ฝ้าย'],
+  ['40/CR20', 'DATA',           'เม.ย. 26', '0.25',  '19/06/2026', '19/06/2026', 'DONE',    '(39) เจาะแก้ไขยอดในเอกสาร VI-260600280 / GR-260600262',                                   'K.นุ๊ก'],
+  ['39/CR20', 'DATA',           'เม.ย. 26', 'FOC',   '19/06/2026', '18/06/2026', 'DONE',    '(38) เปลี่ยน Ratio บาร์กล่อง 8859433790352 จาก 6→3 (เมอร์เรซกา)',                        'K.ฝ้าย'],
   ['-/-',     'Change Request', '',         '-',     '10/06/2026', '-',          'PENDING', '(37) เพิ่มตาราง MinMax แยกสาขา (B001-B008+FG) และยอดขายย้อนหลัง ใน Product Info Panel เอกสาร PO', 'K.อ้น'],
-  ['37/CR19', 'Change Request', '',         '1.25*', '08/06/2026', '-',          'PENDING', '(35) งานหน้าร้าน ปรับตัวเลือกสาเหตุ FR และ WTFR/WTBR แสดงสาเหตุ-หมายเหตุบนใบปิดลัง',  'K.อ้น'],
-  ['38/CR19', 'DATA',           '',         '0.25*', '09/06/2026', '-',          'PENDING', '(36) อัพเดท PSaleStatus Q3-2026 (8,080 rows)',                                             'K.อ้น'],
-  ['36/CR18', 'DATA',           '',         '0.50*', '08/06/2026', '-',          'PENDING', '(34) เปลี่ยนหน่วยสินค้า 8858842055519 (บราวอิท) บาร์หลักจาก กล่อง→ตลับ, บาร์รอง แพ็ค→กล่อง', 'K.แคร์'],
+  ['37/CR19', 'Change Request', 'เม.ย. 26', '1.25',  '08/06/2026', '22/06/2026', 'DONE',    '(35) งานหน้าร้าน ปรับตัวเลือกสาเหตุ FR และ WTFR/WTBR แสดงสาเหตุ-หมายเหตุบนใบปิดลัง',  'K.อ้น'],
+  ['38/CR19', 'DATA',           'เม.ย. 26', '0.25',  '09/06/2026', '17/06/2026', 'DONE',    '(36) อัพเดท PSaleStatus Q3-2026 (8,080 rows)',                                             'K.อ้น'],
+  ['36/CR18', 'DATA',           'มี.ค. 26', '0.50',  '08/06/2026', '08/06/2026', 'DONE',    '(34) เปลี่ยนหน่วยสินค้า 8858842055519 (บราวอิท) บาร์หลักจาก กล่อง→ตลับ, บาร์รอง แพ็ค→กล่อง', 'K.แคร์'],
   ['35/CR17', 'Change Request', 'มี.ค. 26', '0.50', '29/05/2026', '05/06/2026', 'DONE',    '(33) เปลี่ยนหน่วยหลักสินค้า จาก ขวด เป็น หลอด',                                         'K.ตอง'],
   ['34/CR17', 'Change Request', 'มี.ค. 26', '0.50', '28/05/2026', '05/06/2026', 'DONE',    '(32) เปลี่ยนหน่วยหลักสินค้า 2 SKU จาก ชิ้น เป็น แท่ง',                                   'K.ฝ้าย'],
-  ['33/CR17', 'Change Request', 'มี.ค. 26', '1.00', '27/05/2026', '-',          'WIP',     '(30) เพิ่มฟิลด์ที่อยู่ในงานทะเบียนลูกค้า ตำบล/แขวง, อำเภอ/เขต, จังหวัด/รหัสไปรษณีย์', 'K.เพชร'],
-  ['32/CR17', 'Change Request', 'มี.ค. 26', '1.50', '28/05/2026', '-',          'WIP',     '(31) เพิ่ม Filter วันที่ กับประเภทเอกสาร ในรายงาน รายการรอตั้งบัญชีเจ้าหนี้ (AP)',       'K.กุ๊ก'],
+  ['33/CR17', 'Change Request', 'มี.ค. 26', '1.00', '27/05/2026', '15/06/2026', 'DONE',    '(30) เพิ่มฟิลด์ที่อยู่ในงานทะเบียนลูกค้า ตำบล/แขวง, อำเภอ/เขต, จังหวัด/รหัสไปรษณีย์', 'K.เพชร'],
+  ['32/CR17', 'Change Request', 'มี.ค. 26', '1.50', '28/05/2026', '15/06/2026', 'DONE',    '(31) เพิ่ม Filter วันที่ กับประเภทเอกสาร ในรายงาน รายการรอตั้งบัญชีเจ้าหนี้ (AP)',       'K.กุ๊ก'],
   ['31/CR17', 'DATA',           'มี.ค. 26', 'FOC',  '26/05/2026', '26/05/2026', 'DONE',    '(29) เปลี่ยนบาร์กล่อง และ Ratio ของสินค้า',          'K.น้ำน่าน'],
   ['30/CR16', 'Change Request', 'มี.ค. 26', '0.50', '20/05/2026', '02/06/2026', 'DONE',    '(28) เพิ่มคอลัมน์ PSaleStatus ไฟล์ Excel ใบเบิก SF', 'K.อ้อย'],
   ['29/CR15', 'Change Request', 'มี.ค. 26', '1.00', '08/05/2026', '02/06/2026', 'DONE',    '(27) เพิ่มคอลัมน์ภาษีซื้อ Export AP',        'K.บิว'],
