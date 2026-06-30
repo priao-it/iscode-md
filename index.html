@@ -350,7 +350,7 @@
       <span class="total">96</span>
       <span class="unit-big">Man Day/ปี</span>
     </div>
-    <div class="annual-meta">✅ เสร็จสิ้น <strong>24.75 MD</strong> &nbsp;·&nbsp; ⏳ รอดำเนินการ <strong>1 รายการ (MD ยังไม่ระบุ)</strong> &nbsp;·&nbsp; ประมาณการรวม: <strong>24.75 / 96 MD</strong> &nbsp;·&nbsp; Quota คงเหลือ <strong>71.25 MD</strong></div>
+    <div class="annual-meta">✅ เสร็จสิ้น <strong>24.75 MD</strong> &nbsp;·&nbsp; 🔄 กำลังดำเนินการ <strong>2 รายการ (4.50 MD)</strong> &nbsp;·&nbsp; ประมาณการรวม: <strong>24.75 / 96 MD</strong> &nbsp;·&nbsp; Quota คงเหลือ <strong>71.25 MD</strong></div>
 
     <!-- YTD Progress Bar -->
     <div style="margin-top:14px;">
@@ -443,7 +443,7 @@
 
 <!-- CR detail table -->
 <div class="card" style="margin-bottom: 24px;">
-  <h2>รายการ CR ทั้งหมด (40 Logged + 1 Pending Log + 2 Wait = 43 รายการ)</h2>
+  <h2>รายการ CR ทั้งหมด (40 DONE + 2 WIP + 2 Wait = 44 รายการ)</h2>
   <div class="table-wrap"><table>
     <thead>
       <tr>
@@ -484,11 +484,12 @@ Chart.defaults.color = '#495057';
 const crData = [
   // [CRNo, Type, QuotaOf, MD, ReceiveDate(DD/MM/YYYY), LaunchDate(DD/MM/YYYY), Status, Summary, Requester]
   // ReceiveDate: Excel → Word (CR Date) → CSV | MD*: proposed from docx, not yet in Excel | FOC: not counted
+  ['41/CR21', 'Change Request', '',         '3.50',  '29/06/2026', '-',          'WIP',     '(37) เพิ่มตาราง MinMax แยกสาขา (B001-B008+FG) และยอดขายย้อนหลัง ใน Product Info Panel เอกสาร PO', 'K.อ้น'],
+  ['42/CR21', 'DATA',           '',         '1.00',  '29/06/2026', '-',          'WIP',     '(42) อัพเดท Packsize และ CartonQty ที่ทะเบียนสินค้า ตามไฟล์แนบ (7,750 Rows)',              'K.อ้น'],
   ['-/-',     'Change Request', '',         '-',     '-',          '-',          'WAIT',    '(40) เพิ่มการเก็บข้อมูล PSaleStatus ในเอกสาร DI ณ วันที่ขาย',                           'K.อ้น'],
   ['-/-',     'Change Request', '',         '-',     '-',          '-',          'WAIT',    '(41) ปรับป้ายราคาสินค้า และทำรายงานสำหรับหน้าสาขา',                                      'K.อ้อย'],
   ['40/CR20', 'DATA',           'เม.ย. 26', '0.25',  '19/06/2026', '19/06/2026', 'DONE',    '(39) เจาะแก้ไขยอดในเอกสาร VI-260600280 / GR-260600262',                                   'K.นุ๊ก'],
   ['39/CR20', 'DATA',           'เม.ย. 26', 'FOC',   '19/06/2026', '18/06/2026', 'DONE',    '(38) เปลี่ยน Ratio บาร์กล่อง 8859433790352 จาก 6→3 (เมอร์เรซกา)',                        'K.ฝ้าย'],
-  ['-/-',     'Change Request', '',         '-',     '10/06/2026', '-',          'PENDING', '(37) เพิ่มตาราง MinMax แยกสาขา (B001-B008+FG) และยอดขายย้อนหลัง ใน Product Info Panel เอกสาร PO', 'K.อ้น'],
   ['37/CR19', 'Change Request', 'เม.ย. 26', '1.25',  '08/06/2026', '22/06/2026', 'DONE',    '(35) งานหน้าร้าน ปรับตัวเลือกสาเหตุ FR และ WTFR/WTBR แสดงสาเหตุ-หมายเหตุบนใบปิดลัง',  'K.อ้น'],
   ['38/CR19', 'DATA',           'เม.ย. 26', '0.25',  '09/06/2026', '17/06/2026', 'DONE',    '(36) อัพเดท PSaleStatus Q3-2026 (8,080 rows)',                                             'K.อ้น'],
   ['36/CR18', 'DATA',           'มี.ค. 26', '0.50',  '08/06/2026', '08/06/2026', 'DONE',    '(34) เปลี่ยนหน่วยสินค้า 8858842055519 (บราวอิท) บาร์หลักจาก กล่อง→ตลับ, บาร์รอง แพ็ค→กล่อง', 'K.แคร์'],
@@ -780,7 +781,7 @@ crData.forEach(row => {
 });
 
 // ── datetime ──────────────────────────────────────────────────────
-document.getElementById('genDatetime').textContent = '30 มิ.ย. 2569 เวลา 16:12 น.';
+document.getElementById('genDatetime').textContent = '30 มิ.ย. 2569 เวลา 16:28 น.';
 </script>
 
 </body>
