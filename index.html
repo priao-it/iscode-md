@@ -345,12 +345,12 @@
   <div class="annual-info">
     <div class="annual-title">Annual Quota Progress 2026 (Logged in Excel)</div>
     <div class="annual-numbers">
-      <span class="used">24.75</span>
+      <span class="used">25.75</span>
       <span class="divider">/</span>
       <span class="total">96</span>
       <span class="unit-big">Man Day/ปี</span>
     </div>
-    <div class="annual-meta">✅ เสร็จสิ้น <strong>24.75 MD</strong> &nbsp;·&nbsp; 🔄 กำลังดำเนินการ <strong>2 รายการ (4.50 MD)</strong> &nbsp;·&nbsp; ประมาณการรวม: <strong>24.75 / 96 MD</strong> &nbsp;·&nbsp; Quota คงเหลือ <strong>71.25 MD</strong></div>
+    <div class="annual-meta">✅ เสร็จสิ้น <strong>25.75 MD</strong> &nbsp;·&nbsp; 🔄 กำลังดำเนินการ <strong>1 รายการ (3.50 MD)</strong> &nbsp;·&nbsp; ประมาณการรวม: <strong>25.75 / 96 MD</strong> &nbsp;·&nbsp; Quota คงเหลือ <strong>70.25 MD</strong></div>
 
     <!-- YTD Progress Bar -->
     <div style="margin-top:14px;">
@@ -370,7 +370,7 @@
         </div>
       </div>
       <div style="margin-top:20px; font-size:11px; color:#6c757d; display:flex; gap:16px;">
-        <span style="color:#dc3545;">⚠ ต่ำกว่า YTD Quota <strong style="color:#dc3545;">23.25 MD</strong> (ใช้เพียง 51.6% ของ Quota สะสม 6 เดือน)</span>
+        <span style="color:#dc3545;">⚠ ต่ำกว่า YTD Quota <strong style="color:#dc3545;">22.25 MD</strong> (ใช้เพียง 53.6% ของ Quota สะสม 6 เดือน)</span>
       </div>
     </div>
   </div>
@@ -378,9 +378,9 @@
     <svg viewBox="0 0 120 120" width="120" height="120">
       <circle cx="60" cy="60" r="52" fill="none" stroke="#e6f6fd" stroke-width="12"/>
       <circle cx="60" cy="60" r="52" fill="none" stroke="#25a9e0" stroke-width="12"
-        stroke-dasharray="326.7" stroke-dashoffset="242.4"
+        stroke-dasharray="326.7" stroke-dashoffset="239.0"
         stroke-linecap="round" transform="rotate(-90 60 60)"/>
-      <text x="60" y="58" text-anchor="middle" font-size="22" font-weight="700" fill="#231f20">25.8%</text>
+      <text x="60" y="58" text-anchor="middle" font-size="22" font-weight="700" fill="#231f20">26.8%</text>
       <text x="60" y="76" text-anchor="middle" font-size="11" fill="#6c757d">of 96 MD</text>
     </svg>
   </div>
@@ -390,13 +390,13 @@
 <div class="kpi-grid">
   <div class="kpi green">
     <div class="label">เฉลี่ย MD/เดือน (YTD)</div>
-    <div class="value">4.13<span class="unit">MD</span></div>
-    <div class="delta up">ต่ำกว่าเป้า 8 MD/เดือน (-48.4%)</div>
+    <div class="value">4.29<span class="unit">MD</span></div>
+    <div class="delta up">ต่ำกว่าเป้า 8 MD/เดือน (-46.4%)</div>
   </div>
   <div class="kpi orange">
     <div class="label">คาดการณ์สิ้นปี (ตามอัตราปัจจุบัน)</div>
-    <div class="value">49.5<span class="unit">MD</span></div>
-    <div class="delta warn">~51.6% ของโควต้า 96 MD — คงเหลือ 46.5 MD</div>
+    <div class="value">51.5<span class="unit">MD</span></div>
+    <div class="delta warn">~53.6% ของโควต้า 96 MD — คงเหลือ 44.5 MD</div>
   </div>
 </div>
 
@@ -443,7 +443,7 @@
 
 <!-- CR detail table -->
 <div class="card" style="margin-bottom: 24px;">
-  <h2>รายการ CR ทั้งหมด (40 DONE + 2 WIP + 2 Wait = 44 รายการ)</h2>
+  <h2>รายการ CR ทั้งหมด (41 DONE + 1 WIP + 2 Wait = 44 รายการ)</h2>
   <div class="table-wrap"><table>
     <thead>
       <tr>
@@ -485,9 +485,9 @@ const crData = [
   // [CRNo, Type, QuotaOf, MD, ReceiveDate(DD/MM/YYYY), LaunchDate(DD/MM/YYYY), Status, Summary, Requester]
   // ReceiveDate: Excel → Word (CR Date) → CSV | MD*: proposed from docx, not yet in Excel | FOC: not counted
   ['41/CR21', 'Change Request', '',         '3.50',  '29/06/2026', '-',          'WIP',     '(37) เพิ่มตาราง MinMax แยกสาขา (B001-B008+FG) และยอดขายย้อนหลัง ใน Product Info Panel เอกสาร PO', 'K.อ้น'],
-  ['42/CR21', 'DATA',           '',         '1.00',  '29/06/2026', '-',          'WIP',     '(42) อัพเดท Packsize และ CartonQty ที่ทะเบียนสินค้า ตามไฟล์แนบ (7,750 Rows)',              'K.อ้น'],
-  ['-/-',     'Change Request', '',         '-',     '-',          '-',          'WAIT',    '(40) เพิ่มการเก็บข้อมูล PSaleStatus ในเอกสาร DI ณ วันที่ขาย',                           'K.อ้น'],
-  ['-/-',     'Change Request', '',         '-',     '-',          '-',          'WAIT',    '(41) ปรับป้ายราคาสินค้า และทำรายงานสำหรับหน้าสาขา',                                      'K.อ้อย'],
+  ['42/CR21', 'DATA',           '',         '1.00',  '26/06/2026', '26/06/2026', 'DONE',    '(42) อัพเดท Packsize และ CartonQty ที่ทะเบียนสินค้า ตามไฟล์แนบ (7,750 Rows)',              'K.น้ำน่าน'],
+  ['-/-',     'Change Request', '',         '-',     '29/06/2026', '-',          'WAIT',    '(41) MultiInput SO VIP - ปรับหยิบหน่วยเปิดขาย Order Online (หน่วยสต็อก)',               'K.ป๊อป'],
+  ['-/-',     'Change Request', '',         '-',     '29/06/2026', '-',          'WAIT',    '(42) MultiInput SO VIP - เปลี่ยนหน่วยขาย เป็นหน่วยใหญ่ ตามราคา Wholesale',             'K.ป๊อป'],
   ['40/CR20', 'DATA',           'เม.ย. 26', '0.25',  '19/06/2026', '19/06/2026', 'DONE',    '(39) เจาะแก้ไขยอดในเอกสาร VI-260600280 / GR-260600262',                                   'K.นุ๊ก'],
   ['39/CR20', 'DATA',           'เม.ย. 26', 'FOC',   '19/06/2026', '18/06/2026', 'DONE',    '(38) เปลี่ยน Ratio บาร์กล่อง 8859433790352 จาก 6→3 (เมอร์เรซกา)',                        'K.ฝ้าย'],
   ['37/CR19', 'Change Request', 'เม.ย. 26', '1.25',  '08/06/2026', '22/06/2026', 'DONE',    '(35) งานหน้าร้าน ปรับตัวเลือกสาเหตุ FR และ WTFR/WTBR แสดงสาเหตุ-หมายเหตุบนใบปิดลัง',  'K.อ้น'],
@@ -781,7 +781,7 @@ crData.forEach(row => {
 });
 
 // ── datetime ──────────────────────────────────────────────────────
-document.getElementById('genDatetime').textContent = '30 มิ.ย. 2569 เวลา 16:28 น.';
+document.getElementById('genDatetime').textContent = '2 ก.ค. 2569 เวลา 14:15 น.';
 </script>
 
 </body>
