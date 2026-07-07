@@ -484,8 +484,8 @@ Chart.defaults.color = '#495057';
 const crData = [
   // [CRNo, Type, QuotaOf, MD, ReceiveDate(DD/MM/YYYY), LaunchDate(DD/MM/YYYY), Status, Summary, Requester]
   // ReceiveDate: Excel → Word (CR Date) → CSV | MD*: proposed from docx, not yet in Excel | FOC: not counted
-  ['41/CR21', 'Change Request', '',         '3.50',  '29/06/2026', '-',          'WIP',     '(37) เพิ่มตาราง MinMax แยกสาขา (B001-B008+FG) และยอดขายย้อนหลัง ใน Product Info Panel เอกสาร PO', 'K.อ้น'],
-  ['42/CR21', 'DATA',           '',         '1.00',  '26/06/2026', '26/06/2026', 'DONE',    '(42) อัพเดท Packsize และ CartonQty ที่ทะเบียนสินค้า ตามไฟล์แนบ (7,750 Rows)',              'K.น้ำน่าน'],
+  ['41/CR21', 'Change Request', 'เม.ย. 26', '3.50',  '10/06/2026', '-',          'WIP',     '(37) เพิ่มตาราง MinMax แยกสาขา (B001-B008+FG) และยอดขายย้อนหลัง ใน Product Info Panel เอกสาร PO', 'K.อ้น'],
+  ['42/CR21', 'DATA',           'เม.ย. 26', '1.00',  '26/06/2026', '30/06/2026', 'DONE',    '(42) อัพเดท Packsize และ CartonQty ที่ทะเบียนสินค้า ตามไฟล์แนบ (7,750 Rows)',              'K.น้ำน่าน'],
   ['-/-',     'Change Request', '',         '-',     '29/06/2026', '-',          'WAIT',    '(41) MultiInput SO VIP - ปรับหยิบหน่วยเปิดขาย Order Online (หน่วยสต็อก)',               'K.ป๊อป'],
   ['-/-',     'Change Request', '',         '-',     '29/06/2026', '-',          'WAIT',    '(42) MultiInput SO VIP - เปลี่ยนหน่วยขาย เป็นหน่วยใหญ่ ตามราคา Wholesale',             'K.ป๊อป'],
   ['40/CR20', 'DATA',           'เม.ย. 26', '0.25',  '19/06/2026', '19/06/2026', 'DONE',    '(39) เจาะแก้ไขยอดในเอกสาร VI-260600280 / GR-260600262',                                   'K.นุ๊ก'],
@@ -781,7 +781,7 @@ crData.forEach(row => {
 });
 
 // ── datetime ──────────────────────────────────────────────────────
-document.getElementById('genDatetime').textContent = '2 ก.ค. 2569 เวลา 13:38 น.';
+document.getElementById('genDatetime').textContent = '7 ก.ค. 2569 เวลา 14:55 น.';
 </script>
 
 </body>
