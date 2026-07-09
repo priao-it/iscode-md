@@ -350,7 +350,7 @@
       <span class="total">96</span>
       <span class="unit-big">Man Day/ปี</span>
     </div>
-    <div class="annual-meta">✅ เสร็จสิ้น <strong>25.75 MD</strong> &nbsp;·&nbsp; 🔄 กำลังดำเนินการ <strong>1 รายการ (3.50 MD)</strong> &nbsp;·&nbsp; ประมาณการรวม: <strong>25.75 / 96 MD</strong> &nbsp;·&nbsp; Quota คงเหลือ <strong>70.25 MD</strong></div>
+    <div class="annual-meta">✅ เสร็จสิ้น <strong>25.75 MD</strong> &nbsp;·&nbsp; 🔄 กำลังดำเนินการ <strong>1 รายการ (3.50 MD)</strong> &nbsp;·&nbsp; ⏳ รอดำเนินการ <strong>2 รายการ (2.25 MD)</strong> &nbsp;·&nbsp; ประมาณการรวม: <strong>25.75 / 96 MD</strong> &nbsp;·&nbsp; Quota คงเหลือ <strong>70.25 MD</strong></div>
 
     <!-- YTD Progress Bar -->
     <div style="margin-top:14px;">
@@ -443,7 +443,7 @@
 
 <!-- CR detail table -->
 <div class="card" style="margin-bottom: 24px;">
-  <h2>รายการ CR ทั้งหมด (41 DONE + 1 WIP + 2 Wait = 44 รายการ)</h2>
+  <h2>รายการ CR ทั้งหมด (41 DONE + 1 WIP + 2 Pending = 44 รายการ)</h2>
   <div class="table-wrap"><table>
     <thead>
       <tr>
@@ -486,8 +486,8 @@ const crData = [
   // ReceiveDate: Excel → Word (CR Date) → CSV | MD*: proposed from docx, not yet in Excel | FOC: not counted
   ['41/CR21', 'Change Request', 'เม.ย. 26', '3.50',  '10/06/2026', '-',          'WIP',     '(37) เพิ่มตาราง MinMax แยกสาขา (B001-B008+FG) และยอดขายย้อนหลัง ใน Product Info Panel เอกสาร PO', 'K.อ้น'],
   ['42/CR21', 'DATA',           'เม.ย. 26', '1.00',  '26/06/2026', '30/06/2026', 'DONE',    '(42) อัพเดท Packsize และ CartonQty ที่ทะเบียนสินค้า ตามไฟล์แนบ (7,750 Rows)',              'K.น้ำน่าน'],
-  ['-/-',     'Change Request', '',         '-',     '29/06/2026', '-',          'WAIT',    '(41) MultiInput SO VIP - ปรับหยิบหน่วยเปิดขาย Order Online (หน่วยสต็อก)',               'K.ป๊อป'],
-  ['-/-',     'Change Request', '',         '-',     '29/06/2026', '-',          'WAIT',    '(42) MultiInput SO VIP - เปลี่ยนหน่วยขาย เป็นหน่วยใหญ่ ตามราคา Wholesale',             'K.ป๊อป'],
+  ['43/CR22', 'Change Request', 'เม.ย. 26', '1.50',  '29/06/2026', '-',          'PENDING', '(41) MultiInput SO VIP - ปรับหยิบหน่วยเปิดขาย Order Online แก้โปรแกรมให้ไปหยิบหน่วยเล็ก (หน่วยสต็อก)', 'K.ป๊อป'],
+  ['44/CR22', 'Change Request', 'เม.ย. 26', '0.75',  '29/06/2026', '-',          'PENDING', '(42) MultiInput SO VIP - เปลี่ยนหน่วยขาย เป็นหน่วยใหญ่ ตามราคา Wholesale ของสินค้าตามไฟล์แนบ (1,558 rows)', 'K.ป๊อป'],
   ['40/CR20', 'DATA',           'เม.ย. 26', '0.25',  '19/06/2026', '19/06/2026', 'DONE',    '(39) เจาะแก้ไขยอดในเอกสาร VI-260600280 / GR-260600262',                                   'K.นุ๊ก'],
   ['39/CR20', 'DATA',           'เม.ย. 26', 'FOC',   '19/06/2026', '18/06/2026', 'DONE',    '(38) เปลี่ยน Ratio บาร์กล่อง 8859433790352 จาก 6→3 (เมอร์เรซกา)',                        'K.ฝ้าย'],
   ['37/CR19', 'Change Request', 'เม.ย. 26', '1.25',  '08/06/2026', '22/06/2026', 'DONE',    '(35) งานหน้าร้าน ปรับตัวเลือกสาเหตุ FR และ WTFR/WTBR แสดงสาเหตุ-หมายเหตุบนใบปิดลัง',  'K.อ้น'],
@@ -732,9 +732,9 @@ new Chart(document.getElementById('taskTypeChart'), {
 new Chart(document.getElementById('statusChart'), {
   type: 'doughnut',
   data: {
-    labels: ['เสร็จสิ้น (33)', 'กำลังดำเนินการ (2)', 'รอดำเนินการ (6)', 'รอแจ้ง ISCode (2)'],
+    labels: ['เสร็จสิ้น (41)', 'กำลังดำเนินการ (1)', 'รอดำเนินการ (2)', 'รอแจ้ง ISCode (0)'],
     datasets: [{
-      data: [33, 2, 6, 2],
+      data: [41, 1, 2, 0],
       backgroundColor: [GREEN, ORANGE, PURPLE, '#adb5bd'],
       borderWidth: 2,
       borderColor: '#fff'
@@ -781,7 +781,7 @@ crData.forEach(row => {
 });
 
 // ── datetime ──────────────────────────────────────────────────────
-document.getElementById('genDatetime').textContent = '7 ก.ค. 2569 เวลา 14:55 น.';
+document.getElementById('genDatetime').textContent = '9 ก.ค. 2569 เวลา 11:32 น.';
 </script>
 
 </body>
