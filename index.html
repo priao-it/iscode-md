@@ -350,27 +350,27 @@
       <span class="total">96</span>
       <span class="unit-big">Man Day/ปี</span>
     </div>
-    <div class="annual-meta">✅ เสร็จสิ้น <strong>25.75 MD</strong> &nbsp;·&nbsp; 🔄 กำลังดำเนินการ <strong>1 รายการ (3.50 MD)</strong> &nbsp;·&nbsp; ⏳ รอดำเนินการ <strong>2 รายการ (2.25 MD)</strong> &nbsp;·&nbsp; ประมาณการรวม: <strong>25.75 / 96 MD</strong> &nbsp;·&nbsp; Quota คงเหลือ <strong>70.25 MD</strong></div>
+    <div class="annual-meta">✅ เสร็จสิ้น <strong>25.75 MD</strong> &nbsp;·&nbsp; 🔄 กำลังดำเนินการ <strong>3 รายการ (5.75 MD)</strong> &nbsp;·&nbsp; ⏳ รอดำเนินการ <strong>2 รายการ (0.50 MD)</strong> &nbsp;·&nbsp; ประมาณการรวม: <strong>25.75 / 96 MD</strong> &nbsp;·&nbsp; Quota คงเหลือ <strong>70.25 MD</strong></div>
 
     <!-- YTD Progress Bar -->
     <div style="margin-top:14px;">
       <div style="display:flex; justify-content:space-between; font-size:12px; color:#6c757d; margin-bottom:5px;">
-        <span>ประมาณการ <strong style="color:#25a9e0;">24.75 MD</strong></span>
-        <span style="color:#fd7e14;">▼ YTD Quota (6 เดือน) <strong>48 MD</strong></span>
+        <span>ประมาณการ <strong style="color:#25a9e0;">25.75 MD</strong></span>
+        <span style="color:#fd7e14;">▼ YTD Quota (7 เดือน) <strong>56 MD</strong></span>
         <span>เต็มปี 96 MD</span>
       </div>
       <div style="position:relative; background:#e6f6fd; border-radius:8px; height:14px; overflow:visible;">
         <!-- ประมาณการ bar -->
-        <div style="width:25.8%; background:linear-gradient(90deg,#25a9e0,#1a7eb0); height:100%; border-radius:8px; position:relative;">
+        <div style="width:26.8%; background:linear-gradient(90deg,#25a9e0,#1a7eb0); height:100%; border-radius:8px; position:relative;">
           <span style="position:absolute; right:-2px; top:50%; transform:translateY(-50%); width:4px; height:20px; background:#1a7eb0; border-radius:2px;"></span>
         </div>
-        <!-- YTD Quota marker at 40/96 = 41.67% -->
-        <div style="position:absolute; left:50.00%; top:-5px; height:24px; width:2px; background:#fd7e14; border-radius:2px;">
-          <div style="position:absolute; bottom:-18px; left:50%; transform:translateX(-50%); font-size:10px; color:#fd7e14; white-space:nowrap; font-weight:600;">48 MD</div>
+        <!-- YTD Quota marker at 56/96 = 58.33% -->
+        <div style="position:absolute; left:58.33%; top:-5px; height:24px; width:2px; background:#fd7e14; border-radius:2px;">
+          <div style="position:absolute; bottom:-18px; left:50%; transform:translateX(-50%); font-size:10px; color:#fd7e14; white-space:nowrap; font-weight:600;">56 MD</div>
         </div>
       </div>
       <div style="margin-top:20px; font-size:11px; color:#6c757d; display:flex; gap:16px;">
-        <span style="color:#dc3545;">⚠ ต่ำกว่า YTD Quota <strong style="color:#dc3545;">22.25 MD</strong> (ใช้เพียง 53.6% ของ Quota สะสม 6 เดือน)</span>
+        <span style="color:#dc3545;">⚠ ต่ำกว่า YTD Quota <strong style="color:#dc3545;">30.25 MD</strong> (ใช้เพียง 46.0% ของ Quota สะสม 7 เดือน)</span>
       </div>
     </div>
   </div>
@@ -443,7 +443,7 @@
 
 <!-- CR detail table -->
 <div class="card" style="margin-bottom: 24px;">
-  <h2>รายการ CR ทั้งหมด (41 DONE + 1 WIP + 2 Pending = 44 รายการ)</h2>
+  <h2>รายการ CR ทั้งหมด (41 DONE + 3 WIP + 2 Pending = 46 รายการ)</h2>
   <div class="table-wrap"><table>
     <thead>
       <tr>
@@ -482,8 +482,10 @@ Chart.defaults.color = '#495057';
 // ── CR data (must be defined first) ──────────────────────────────
 // Note: MD value with "*" = proposed from docx, not yet logged in Excel
 const crData = [
-  ['44/CR22', 'Change Request', 'เม.ย. 26', '0.75',  '29/06/2026', '-',          'PENDING', '(42) MultiInput SO VIP - เปลี่ยนหน่วยขาย เป็นหน่วยใหญ่ ตามราคา Wholesale ของสินค้าตามไฟล์แนบ (1,558 rows)', 'K.ป๊อป'],
-  ['43/CR22', 'Change Request', 'เม.ย. 26', '1.50',  '29/06/2026', '-',          'PENDING', '(41) MultiInput SO VIP - ปรับหยิบหน่วยเปิดขาย Order Online แก้โปรแกรมให้ไปหยิบหน่วยเล็ก (หน่วยสต็อก)', 'K.ป๊อป'],
+  ['46/CR23', 'Change Request', 'เม.ย. 26', '0.50',  '22/07/2026', '-',  'PENDING', '(44) อัพเดทชื่อพนักงานใน รายงาน รายการใบคุมรถ (TR) เปลี่ยนตัวเลือกคนขับรถเป็น คนขับรถ A/B/C / อื่นๆ', 'K.ป๊อป'],
+  ['45/CR23', 'DATA',           'เม.ย. 26', 'FOC',   '22/07/2026', '-',  'PENDING', '(43) Mark Delete Barcode 100658 (แพ็ค) ของรหัสสินค้า 100222 แมนชอง เน็ตคลุมผม HA-HB010008', 'K.ป๊อป'],
+  ['44/CR22', 'Change Request', 'เม.ย. 26', '0.75',  '29/06/2026', '-',          'WIP',     '(42) MultiInput SO VIP - เปลี่ยนหน่วยขาย เป็นหน่วยใหญ่ ตามราคา Wholesale ของสินค้าตามไฟล์แนบ (1,558 rows)', 'K.ป๊อป'],
+  ['43/CR22', 'Change Request', 'เม.ย. 26', '1.50',  '29/06/2026', '-',          'WIP',     '(41) MultiInput SO VIP - ปรับหยิบหน่วยเปิดขาย Order Online แก้โปรแกรมให้ไปหยิบหน่วยเล็ก (หน่วยสต็อก)', 'K.ป๊อป'],
   ['42/CR21', 'DATA',           'เม.ย. 26', '1.00',  '26/06/2026', '30/06/2026', 'DONE',    '(42) อัพเดท Packsize และ CartonQty ที่ทะเบียนสินค้า ตามไฟล์แนบ (7,750 Rows)',              'K.น้ำน่าน'],
   ['41/CR21', 'Change Request', 'เม.ย. 26', '3.50',  '10/06/2026', '-',          'WIP',     '(37) เพิ่มตาราง MinMax แยกสาขา (B001-B008+FG) และยอดขายย้อนหลัง ใน Product Info Panel เอกสาร PO', 'K.อ้น'],
   ['40/CR20', 'DATA',           'เม.ย. 26', '0.25',  '19/06/2026', '19/06/2026', 'DONE',    '(39) เจาะแก้ไขยอดในเอกสาร VI-260600280 / GR-260600262',                                   'K.นุ๊ก'],
@@ -730,9 +732,9 @@ new Chart(document.getElementById('taskTypeChart'), {
 new Chart(document.getElementById('statusChart'), {
   type: 'doughnut',
   data: {
-    labels: ['เสร็จสิ้น (41)', 'กำลังดำเนินการ (1)', 'รอดำเนินการ (2)', 'รอแจ้ง ISCode (0)'],
+    labels: ['เสร็จสิ้น (41)', 'กำลังดำเนินการ (3)', 'รอดำเนินการ (2)', 'รอแจ้ง ISCode (0)'],
     datasets: [{
-      data: [41, 1, 2, 0],
+      data: [41, 3, 2, 0],
       backgroundColor: [GREEN, ORANGE, PURPLE, '#adb5bd'],
       borderWidth: 2,
       borderColor: '#fff'
@@ -779,7 +781,7 @@ crData.forEach(row => {
 });
 
 // ── datetime ──────────────────────────────────────────────────────
-document.getElementById('genDatetime').textContent = '9 ก.ค. 2569 เวลา 11:40 น.';
+document.getElementById('genDatetime').textContent = '24 ก.ค. 2569 เวลา 8:44 น.';
 </script>
 
 </body>
