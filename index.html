@@ -350,7 +350,7 @@
       <span class="total">96</span>
       <span class="unit-big">Man Day/ปี</span>
     </div>
-    <div class="annual-meta">✅ เสร็จสิ้น <strong>25.75 MD</strong> &nbsp;·&nbsp; 🔄 กำลังดำเนินการ <strong>3 รายการ (5.75 MD)</strong> &nbsp;·&nbsp; ⏳ รอดำเนินการ <strong>2 รายการ (0.50 MD)</strong> &nbsp;·&nbsp; Quota คงเหลือ <strong>64.50 MD</strong></div>
+    <div class="annual-meta">✅ เสร็จสิ้น <strong>25.75 MD</strong> &nbsp;·&nbsp; 🔄 กำลังดำเนินการ <strong>3 รายการ (5.75 MD)</strong> &nbsp;·&nbsp; ⏳ รอดำเนินการ <strong>4 รายการ (1.00 MD)</strong> &nbsp;·&nbsp; Quota คงเหลือ <strong>64.50 MD</strong></div>
 
     <!-- YTD Progress Bar -->
     <div style="margin-top:14px;">
@@ -443,7 +443,7 @@
 
 <!-- CR detail table -->
 <div class="card" style="margin-bottom: 24px;">
-  <h2>รายการ CR ทั้งหมด (41 DONE + 3 WIP + 2 Pending = 46 รายการ)</h2>
+  <h2>รายการ CR ทั้งหมด (41 DONE + 3 WIP + 4 Pending = 48 รายการ)</h2>
   <div class="table-wrap"><table>
     <thead>
       <tr>
@@ -482,6 +482,8 @@ Chart.defaults.color = '#495057';
 // ── CR data (must be defined first) ──────────────────────────────
 // Note: MD value with "*" = proposed from docx, not yet logged in Excel
 const crData = [
+  ['48/CR24', 'DATA', 'พ.ค. 26', '0.50',  '30/07/2026', '-', 'PENDING', '(45) เปลี่ยนหน่วยสินค้า จากกล่อง เป็นตลับ รหัส 8858842063699 บราวอิท ซีรีย์วัน อีซี่ดรออิ้ง บราวแชโดว์ สีดาร์กบราวน์', 'K.ป๊อป'],
+  ['47/CR24', 'DATA', 'เม.ย. 26', 'FOC',   '30/07/2026', '-', 'PENDING', '(46) Mark Delete Barcode 709771 (กล่อง) ของรหัส 8859542709740 บิวตี้แลป เอทูพี คอนเซ็นเทรต พีช ดาร์คสปอต', 'K.ป๊อป'],
   ['46/CR23', 'Change Request', 'เม.ย. 26', '0.50',  '22/07/2026', '-',  'PENDING', '(44) อัพเดทชื่อพนักงานใน รายงาน รายการใบคุมรถ (TR) เปลี่ยนตัวเลือกคนขับรถเป็น คนขับรถ A/B/C / อื่นๆ', 'K.ป๊อป'],
   ['45/CR23', 'DATA',           'เม.ย. 26', 'FOC',   '22/07/2026', '-',  'PENDING', '(43) Mark Delete Barcode 100658 (แพ็ค) ของรหัสสินค้า 100222 แมนชอง เน็ตคลุมผม HA-HB010008', 'K.ป๊อป'],
   ['44/CR22', 'Change Request', 'เม.ย. 26', '0.75',  '29/06/2026', '-',          'WIP',     '(42) MultiInput SO VIP - เปลี่ยนหน่วยขาย เป็นหน่วยใหญ่ ตามราคา Wholesale ของสินค้าตามไฟล์แนบ (1,558 rows)', 'K.ป๊อป'],
@@ -732,9 +734,9 @@ new Chart(document.getElementById('taskTypeChart'), {
 new Chart(document.getElementById('statusChart'), {
   type: 'doughnut',
   data: {
-    labels: ['เสร็จสิ้น (41)', 'กำลังดำเนินการ (3)', 'รอดำเนินการ (2)', 'รอแจ้ง ISCode (0)'],
+    labels: ['เสร็จสิ้น (41)', 'กำลังดำเนินการ (3)', 'รอดำเนินการ (4)', 'รอแจ้ง ISCode (0)'],
     datasets: [{
-      data: [41, 3, 2, 0],
+      data: [41, 3, 4, 0],
       backgroundColor: [GREEN, ORANGE, PURPLE, '#adb5bd'],
       borderWidth: 2,
       borderColor: '#fff'
@@ -781,7 +783,7 @@ crData.forEach(row => {
 });
 
 // ── datetime ──────────────────────────────────────────────────────
-document.getElementById('genDatetime').textContent = '24 ก.ค. 2569 เวลา 8:44 น.';
+document.getElementById('genDatetime').textContent = '30 ก.ค. 2569 เวลา 10:40 น.';
 </script>
 
 </body>
