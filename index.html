@@ -345,23 +345,23 @@
   <div class="annual-info">
     <div class="annual-title">Annual Quota Progress 2026 (Logged in Excel)</div>
     <div class="annual-numbers">
-      <span class="used">32.50</span>
+      <span class="used">36.25</span>
       <span class="divider">/</span>
       <span class="total">96</span>
       <span class="unit-big">Man Day/ปี</span>
     </div>
-    <div class="annual-meta">✅ เสร็จสิ้น <strong>32.50 MD</strong> &nbsp;·&nbsp; 🔄 กำลังดำเนินการ <strong>0 รายการ (0 MD)</strong> &nbsp;·&nbsp; ⏳ รอดำเนินการ <strong>4 รายการ (3.75 MD + 2 FOC)</strong> &nbsp;·&nbsp; Quota คงเหลือ <strong>63.50 MD</strong></div>
+    <div class="annual-meta">✅ เสร็จสิ้น <strong>32.50 MD</strong> &nbsp;·&nbsp; 🔄 กำลังดำเนินการ <strong>0 รายการ (0 MD)</strong> &nbsp;·&nbsp; ⏳ รอดำเนินการ <strong>4 รายการ (3.75 MD + 2 FOC)</strong> &nbsp;·&nbsp; Quota คงเหลือ <strong>59.75 MD</strong></div>
 
     <!-- YTD Progress Bar -->
     <div style="margin-top:14px;">
       <div style="display:flex; justify-content:space-between; font-size:12px; color:#6c757d; margin-bottom:5px;">
-        <span>ประมาณการ <strong style="color:#25a9e0;">32.50 MD</strong></span>
+        <span>ประมาณการ <strong style="color:#25a9e0;">36.25 MD</strong></span>
         <span style="color:#fd7e14;">▼ YTD Quota (8 เดือน) <strong>64 MD</strong></span>
         <span>เต็มปี 96 MD</span>
       </div>
       <div style="position:relative; background:#e6f6fd; border-radius:8px; height:14px; overflow:visible;">
         <!-- ประมาณการ bar -->
-        <div style="width:33.9%; background:linear-gradient(90deg,#25a9e0,#1a7eb0); height:100%; border-radius:8px; position:relative;">
+        <div style="width:37.8%; background:linear-gradient(90deg,#25a9e0,#1a7eb0); height:100%; border-radius:8px; position:relative;">
           <span style="position:absolute; right:-2px; top:50%; transform:translateY(-50%); width:4px; height:20px; background:#1a7eb0; border-radius:2px;"></span>
         </div>
         <!-- YTD Quota marker at 56/96 = 58.33% -->
@@ -370,7 +370,7 @@
         </div>
       </div>
       <div style="margin-top:20px; font-size:11px; color:#6c757d; display:flex; gap:16px;">
-        <span style="color:#dc3545;">⚠ ต่ำกว่า YTD Quota <strong style="color:#dc3545;">31.50 MD</strong> (ใช้เพียง 50.8% ของ Quota สะสม 8 เดือน)</span>
+        <span style="color:#dc3545;">⚠ ต่ำกว่า YTD Quota <strong style="color:#dc3545;">27.75 MD</strong> (ใช้เพียง 56.6% ของ Quota สะสม 8 เดือน)</span>
       </div>
     </div>
   </div>
@@ -378,9 +378,9 @@
     <svg viewBox="0 0 120 120" width="120" height="120">
       <circle cx="60" cy="60" r="52" fill="none" stroke="#e6f6fd" stroke-width="12"/>
       <circle cx="60" cy="60" r="52" fill="none" stroke="#25a9e0" stroke-width="12"
-        stroke-dasharray="326.7" stroke-dashoffset="216.1"
+        stroke-dasharray="326.7" stroke-dashoffset="203.4"
         stroke-linecap="round" transform="rotate(-90 60 60)"/>
-      <text x="60" y="58" text-anchor="middle" font-size="22" font-weight="700" fill="#231f20">33.9%</text>
+      <text x="60" y="58" text-anchor="middle" font-size="22" font-weight="700" fill="#231f20">37.8%</text>
       <text x="60" y="76" text-anchor="middle" font-size="11" fill="#6c757d">of 96 MD</text>
     </svg>
   </div>
@@ -390,13 +390,13 @@
 <div class="kpi-grid">
   <div class="kpi green">
     <div class="label">เฉลี่ย MD/เดือน (YTD)</div>
-    <div class="value">4.06<span class="unit">MD</span></div>
-    <div class="delta up">ต่ำกว่าเป้า 8 MD/เดือน (-49.2%)</div>
+    <div class="value">4.53<span class="unit">MD</span></div>
+    <div class="delta up">ต่ำกว่าเป้า 8 MD/เดือน (-43.4%)</div>
   </div>
   <div class="kpi orange">
     <div class="label">คาดการณ์สิ้นปี (ตามอัตราปัจจุบัน)</div>
-    <div class="value">48.8<span class="unit">MD</span></div>
-    <div class="delta warn">~50.8% ของโควต้า 96 MD — คงเหลือ 47.3 MD</div>
+    <div class="value">54.4<span class="unit">MD</span></div>
+    <div class="delta warn">~56.6% ของโควต้า 96 MD — คงเหลือ 41.6 MD</div>
   </div>
 </div>
 
@@ -712,9 +712,9 @@ allMonthLabels.forEach(label => {
 new Chart(document.getElementById('taskTypeChart'), {
   type: 'doughnut',
   data: {
-    labels: ['Change Request (24.25 MD)', 'DATA (8.25 MD)'],
+    labels: ['Change Request (27.75 MD)', 'DATA (8.50 MD)'],
     datasets: [{
-      data: [24.25, 8.25],
+      data: [27.75, 8.50],
       backgroundColor: [PRIAO_BLUE, PRIAO_BLUE_LIGHT],
       borderWidth: 2,
       borderColor: '#fff'
@@ -727,7 +727,7 @@ new Chart(document.getElementById('taskTypeChart'), {
       legend: { position: 'bottom' },
       tooltip: {
         callbacks: {
-          label: (ctx) => `${ctx.label}: ${ctx.raw} MD (${((ctx.raw/32.50)*100).toFixed(1)}%)`
+          label: (ctx) => `${ctx.label}: ${ctx.raw} MD (${((ctx.raw/36.25)*100).toFixed(1)}%)`
         }
       }
     }
@@ -787,7 +787,7 @@ crData.forEach(row => {
 });
 
 // ── datetime ──────────────────────────────────────────────────────
-document.getElementById('genDatetime').textContent = '17 ก.ย. 2569 เวลา 13:12 น.';
+document.getElementById('genDatetime').textContent = '17 ก.ย. 2569 เวลา 13:19 น.';
 </script>
 
 </body>
