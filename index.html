@@ -350,7 +350,7 @@
       <span class="total">96</span>
       <span class="unit-big">Man Day/ปี</span>
     </div>
-    <div class="annual-meta">✅ เสร็จสิ้น <strong>32.50 MD</strong> &nbsp;·&nbsp; 🔄 กำลังดำเนินการ <strong>0 รายการ (0 MD)</strong> &nbsp;·&nbsp; ⏳ รอดำเนินการ <strong>1 รายการ (FOC)</strong> &nbsp;·&nbsp; Quota คงเหลือ <strong>63.50 MD</strong></div>
+    <div class="annual-meta">✅ เสร็จสิ้น <strong>32.50 MD</strong> &nbsp;·&nbsp; 🔄 กำลังดำเนินการ <strong>0 รายการ (0 MD)</strong> &nbsp;·&nbsp; ⏳ รอดำเนินการ <strong>4 รายการ (3.75 MD + 2 FOC)</strong> &nbsp;·&nbsp; Quota คงเหลือ <strong>63.50 MD</strong></div>
 
     <!-- YTD Progress Bar -->
     <div style="margin-top:14px;">
@@ -443,7 +443,7 @@
 
 <!-- CR detail table -->
 <div class="card" style="margin-bottom: 24px;">
-  <h2>รายการ CR ทั้งหมด (48 DONE + 0 WIP + 1 Pending = 49 รายการ)</h2>
+  <h2>รายการ CR ทั้งหมด (48 DONE + 0 WIP + 4 Pending = 52 รายการ)</h2>
   <div class="table-wrap"><table>
     <thead>
       <tr>
@@ -482,6 +482,9 @@ Chart.defaults.color = '#495057';
 // ── CR data (must be defined first) ──────────────────────────────
 // Note: MD value with "*" = proposed from docx, not yet logged in Excel
 const crData = [
+  ['52/CR26', 'DATA',           '', '0.25', '04/09/2026', '-', 'PENDING', '(49) อัพเดท PSaleStatus Q2-2026 ตามไฟล์แนบ คอลัมน์ G PSale ใหม่ (Final) (7,761 rows)', 'K.เกด'],
+  ['51/CR26', 'Change Request', '', '3.50', '17/08/2026', '-', 'PENDING', '(48) ปรับระบบหน้าสร้าง RO ตอนเพิ่มสินค้าให้มีฟังก์ชันเปลี่ยนหน่วย (เพิ่มฟังก์ชันเลือกหน่วย และแสดง Ratio + หน่วยย่อย)', 'K.ปลื้ม'],
+  ['50/CR26', 'Change Request', '', 'FOC',  '17/08/2026', '-', 'PENDING', '(48) ตอนเพิ่มสินค้าหน้าสร้าง/แก้ไข RO ให้ไปหยิบหน่วยที่เป็นหน่วยซื้อหลักมาใช้ (FOC)', 'K.ปลื้ม'],
   ['49/CR25', 'Change Request', '', 'FOC',   '04/08/2026', '-', 'PENDING', '(47) ยกเลิกการเชื่อมต่อ/อัพเดต สต็อกและราคาสินค้า กับเว็บ praio.co.th ไม่ต้องทำ Re-index', 'K.ป๊อป'],
   ['48/CR24', 'DATA', 'พ.ค. 26', '0.50',  '23/07/2026', '31/07/2026', 'DONE', '(45) เปลี่ยนหน่วยสินค้า จากกล่อง เป็นตลับ รหัส 8858842063699 บราวอิท ซีรีย์วัน อีซี่ดรออิ้ง บราวแชโดว์ สีดาร์กบราวน์', 'K.ป๊อป'],
   ['47/CR24', 'DATA', 'เม.ย. 26', 'FOC',   '24/07/2026', '24/07/2026', 'DONE', '(46) Mark Delete Barcode 709771 (กล่อง) ของรหัส 8859542709740 บิวตี้แลป เอทูพี คอนเซ็นเทรต พีช ดาร์คสปอต', 'K.ป๊อป'],
@@ -735,9 +738,9 @@ new Chart(document.getElementById('taskTypeChart'), {
 new Chart(document.getElementById('statusChart'), {
   type: 'doughnut',
   data: {
-    labels: ['เสร็จสิ้น (48)', 'กำลังดำเนินการ (0)', 'รอดำเนินการ (1)', 'รอแจ้ง ISCode (0)'],
+    labels: ['เสร็จสิ้น (48)', 'กำลังดำเนินการ (0)', 'รอดำเนินการ (4)', 'รอแจ้ง ISCode (0)'],
     datasets: [{
-      data: [48, 0, 1, 0],
+      data: [48, 0, 4, 0],
       backgroundColor: [GREEN, ORANGE, PURPLE, '#adb5bd'],
       borderWidth: 2,
       borderColor: '#fff'
@@ -784,7 +787,7 @@ crData.forEach(row => {
 });
 
 // ── datetime ──────────────────────────────────────────────────────
-document.getElementById('genDatetime').textContent = '3 ก.ย. 2569 เวลา 16:04 น.';
+document.getElementById('genDatetime').textContent = '17 ก.ย. 2569 เวลา 13:12 น.';
 </script>
 
 </body>
